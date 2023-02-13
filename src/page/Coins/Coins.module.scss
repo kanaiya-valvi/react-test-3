@@ -1,0 +1,24 @@
+.coin {
+  max-height: 100vh;
+  display: grid;
+  grid-template-rows: min-content 1fr;
+  &__title {
+    font-size: 3rem;
+    padding: 2rem;
+    background-color: var(--bg);
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--text-secondary);
+  }
+  &__item {
+    background-color: var(--bg);
+    overflow-y: scroll;
+    padding: 4rem;
+  }
+  &__list {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    background: var(--card-bg);
+  }
+}
+

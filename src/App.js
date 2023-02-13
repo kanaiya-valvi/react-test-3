@@ -1,57 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Dashboard from "./layout/Dashboard";
+import Auth from "./Auth/Auth";
+import { signOutAuth, singIn } from "./store/actions/actionSlice";
+import Loader from "./UI/Loader/Loader";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 
 function App() {
+  const dispatch = useDispatch();
+  const { isAuthe } = useSelector((state) => state.data);
+  const [loding, setLoding] = useState(false);
+  const [theme, setTheme] = useState("dark");
+
+  useEffect(() => {
+    setLoding(true);
+    const data = JSON.parse(localStorage.getItem("user"));
+    setLoding(false);
+    if (data) {
+      dispatch(singIn(data));
+    } else {
+      dispatch(signOutAuth());
+    }
+  }, [isAuthe]);
+
+  let themeLigit = <FontAwesomeIcon icon={faSun} />;
+  let themedark = <FontAwesomeIcon icon={faMoon} />;
+  const themeHandler = () => {
+    if (theme === "dark") {
+      setTheme("");
+    } else {
+      setTheme("dark");
+    }
+  };  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    <main className={theme}>
+      <button onClick={themeHandler} className="theme">
+        {theme === "dark" ? themeLigit : themedark}
+      </button>
+      {loding && <Loader />}
+      {isAuthe && !loding && <Dashboard />}
+      {!isAuthe && !loding && <Auth />}
+    </main>
   );
 }
 

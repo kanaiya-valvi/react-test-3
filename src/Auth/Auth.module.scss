@@ -1,0 +1,74 @@
+.auth {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg);
+  &__title {
+    margin-bottom: 2rem;
+    font-size: 3rem;
+    text-align: center;
+    color: var(--text-primary);
+  }
+  &__container {
+    padding: 4rem;
+    min-width: 26vw;
+    min-height: 70vh;
+    border-radius: 8px;
+    background-color: var(--card-bg);
+  }
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    &_group {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    &_input {
+      border: 1px solid var(--text-primary);
+      color: var(--text-primary);
+      outline: none;
+      font-size: 1.4rem;
+      height: 2rem;
+      padding: 2rem 1.5rem;
+      background-color: transparent;
+      transition: all 0.2s;
+      &:focus {
+        outline: none;
+      }
+    }
+    &_submit {
+      border: none;
+      padding: 1.2rem;
+      border-radius: 4px;
+      transition: all 0.2s;
+      font-weight: bolder;
+      background-color: var(--primary);
+      color: var(--white);
+    }
+    &_singUpText {
+      font-size: 1.4rem;
+      color: var(--text-secondary);
+    }
+    &_singUpBtn {
+      background-color: transparent;
+      outline: none;
+      border: none;
+      font-weight: bolder;
+      text-decoration: underline;
+      cursor: pointer;
+      color: var(--text-primary);
+    }
+  }
+}
+.gooleAuth {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-weight: bolder;
+  text-decoration: underline;
+  color: var(--text-secondary);
+}
