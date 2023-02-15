@@ -8,6 +8,7 @@ import {
   faArrowTrendUp,
   faRightLeft,
   faPieChart,
+  faGears,
 } from "@fortawesome/free-solid-svg-icons";
 
 import style from "./Navigation.module.scss";
@@ -49,6 +50,12 @@ const NavLik = () => {
         <NavLink className={style.nav__link} to="stats">
           <FontAwesomeIcon icon={faPieChart} className={style.nav__logo_icon} />
           Stats
+        </NavLink>
+      </li>
+      <li className="nav__item">
+        <NavLink className={style.nav__link} to="settings">
+          <FontAwesomeIcon icon={faGears} className={style.nav__logo_icon} />
+          Settings
         </NavLink>
       </li>
     </>

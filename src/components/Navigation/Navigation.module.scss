@@ -1,5 +1,5 @@
 .nav {
-  background-color: var(--nav-bg);
+  background-color: var(--background);
   display: grid;
   grid-template-rows: auto 1fr;
   &__logo {
@@ -8,31 +8,32 @@
     align-items: center;
     font-size: 3rem;
     font-weight: bolder;
-    border-bottom: 1px solid var(--text-secondary);
+    // border-bottom: 1px solid var(--text-secondary);
     &_link {
-      color:var(--text-primary);
+      color: var(--sidebar-text);
       display: flex;
       gap: 1rem;
       align-items: center;
-      justify-content: center;      
+      justify-content: center;
     }
   }
   &__list {
     display: flex;
     flex-direction: column;
-    margin-top: 1rem;     
-    color:var(--text-secondary);
+    margin-top: 1rem;
+    color: var(--sidebar-text);
   }
   &__link {
-    font-size: 1.8rem;    
+    font-size: 1.8rem;
     color: var(--black);
     display: flex;
     gap: 1rem;
     align-items: center;
     transition: all 0.2s;
     padding: 1.5rem 2rem;
+    color: var(--sidebar-link);
     &:hover {
-      color: var(--text-primary);      
+      color: var(--sidebar-text);
     }
   }
 }
@@ -47,7 +48,8 @@
   font-weight: bolder;
   font-size: 1.6rem;
   transition: all 0.2s;
+  color: var(--sidebar-text);
   &:hover {
-    color: var(--primary);
+    color: var(--sidebar-link);
   }
 }

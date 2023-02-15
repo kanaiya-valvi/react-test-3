@@ -1,0 +1,101 @@
+.dashboard {
+  min-height: 100vh;
+  max-height: 100vh;
+  background-color: var(--bg);
+  padding: 2rem 4rem;
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  gap: 2rem;
+  overflow-y: auto;
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    &_heading {
+      font-size: 3rem;
+      color: var(--dashboard-heading);
+    }
+    &_form {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      padding: 1rem 2rem;
+      border-radius: 10rem;
+      background-color: var(--selecter-bg);
+      option {
+        background-color: var(--selecter-bg);
+        color: var(--selecter-text);
+      }
+    }
+    &_formImg {
+      height: 2rem;
+      width: 2rem;
+    }
+    &_select {
+      background: transparent;
+      min-width: 15rem;
+      height: 3rem;
+      border: none;
+      outline: none;
+      font-weight: bolder;
+      color: var(--selecter-text);
+    }
+  }
+  &__subheading {
+    color: var(--dashboard-subheading);
+    font-size: 1.2rem;
+  }
+  &__card {
+    background-color: var(--card-bg);
+    padding: 1rem;
+    border-radius: 1.2rem;
+    &_title {
+      color: var(--card-heading);
+      font-size: 2rem;
+    }
+    &_top {
+      padding: 2rem;
+      display: grid;
+      gap: 2rem;
+    }
+    &_bottom {
+      padding: 2rem;
+    }
+  }
+  &__stake {
+    display: grid;
+    gap: 4rem;
+    grid-template-columns: repeat(3, 1fr);
+    animation: stakeAnimation .5s ease-in;
+    transition: 0.2s;
+    &_icon {
+      height: 2rem;
+      width: 2rem;
+    }
+    &_img {
+      height: 3rem;
+      width: 3rem;
+    }
+    &_card {
+      background-color: var(--stack-bg);
+      color: var(--stack-text);
+      align-items: center;
+      gap: 2rem;
+      padding: 2rem;
+      border-radius: 0.4rem;
+      display: flex;
+      &_text {
+        font-size: 1.6rem;
+      }
+    }
+  }
+  @keyframes stakeAnimation {
+    0% {
+      transform: translateY(1rem);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+}

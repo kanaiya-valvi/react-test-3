@@ -3,7 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const inisialValue = {
   isAuthe: false,
   user: [],
-  coin: [],
+  userCoins: [],
+  coinIndex: 0,
+  coins: [],
   market: [],
   state: [],
   exchange: [],
@@ -20,9 +22,19 @@ const actionSlice = createSlice({
     signOutAuth(state) {
       state.isAuthe = false;
     },
+    getCoins(state, action) {
+      state.coins = action.payload;
+    },
+    addCoin(state, action) {
+      state.userCoins.push(action.payload);
+    },
+    selectCoin(state, action) {
+      state.coinIndex = action.payload;
+    },
   },
 });
 
 export default actionSlice.reducer;
 
-export const { singIn, signOutAuth } = actionSlice.actions;
+export const { singIn, signOutAuth, getCoins, addCoin, selectCoin } =
+  actionSlice.actions;
