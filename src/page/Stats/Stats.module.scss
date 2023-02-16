@@ -1,0 +1,59 @@
+.stats {
+  padding: 2rem;
+  background: var(--stats-bg);
+  display: grid;
+  gap: 2rem;
+  &__header {
+    background-color: var(--stats-content);
+    padding: 2rem;
+    border-radius: 0.6rem;
+  }
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  &__newcoin {
+    background-color: var(--stats-content);
+    padding: 2rem;
+    border-radius: 0.6rem;
+  }
+  &__bestcoin {
+    background-color: var(--stats-content);
+    padding: 2rem;
+    border-radius: 0.6rem;
+  }
+  &__title {
+    font-size: 2rem;
+    color: var(--stats-heading);
+  }
+  &__image {
+    width: 3rem;
+    height: 3rem;
+  }
+  &__item {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 2rem;
+    align-items: center;
+    padding: 1rem 0;
+  }
+  &__coinName {
+    font-size: 1.4rem;
+  }
+  &__coinUrl {
+    font-size: 1.4rem;
+    padding: 1rem 3rem;
+    text-align: center;
+    font-weight: 600;
+    width: min-content;
+    display: inline-block;
+    text-decoration: none;
+    background: var(--stats-btn-bg);
+
+    color: var(--stats-btn-text);
+    &:hover {
+      background: var(--stats-btn-hover);
+    }
+  }
+}

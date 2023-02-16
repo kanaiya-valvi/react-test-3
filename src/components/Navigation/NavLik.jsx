@@ -4,8 +4,7 @@ import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faGrip,
-  faCoins,
-  faArrowTrendUp,
+  faCoins,  
   faRightLeft,
   faPieChart,
   faGears,
@@ -26,15 +25,6 @@ const NavLik = () => {
         <NavLink className={style.nav__link} to="coins">
           <FontAwesomeIcon icon={faCoins} className={style.nav__logo_icon} />
           Coins
-        </NavLink>
-      </li>
-      <li className="nav__item">
-        <NavLink className={style.nav__link} to="markets">
-          <FontAwesomeIcon
-            icon={faArrowTrendUp}
-            className={style.nav__logo_icon}
-          />
-          Markets
         </NavLink>
       </li>
       <li className="nav__item">

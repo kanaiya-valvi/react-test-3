@@ -67,7 +67,7 @@
     display: grid;
     gap: 4rem;
     grid-template-columns: repeat(3, 1fr);
-    animation: stakeAnimation .5s ease-in;
+    animation: stakeAnimation 0.5s ease-in;
     transition: 0.2s;
     &_icon {
       height: 2rem;
@@ -98,4 +98,11 @@
       transform: translateY(0);
     }
   }
+}
+.goToCoin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
 }

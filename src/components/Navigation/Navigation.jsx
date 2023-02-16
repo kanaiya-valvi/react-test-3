@@ -4,7 +4,7 @@ import NavLik from "./NavLik";
 import { signOut } from "firebase/auth";
 
 import style from "./Navigation.module.scss";
-import { auth } from "../../Auth/firebase";
+import { auth } from "../../auth/firebase";
 import { useDispatch } from "react-redux";
 import { signOutAuth } from "../../store/actions/actionSlice";
 

@@ -12,7 +12,7 @@ import {
   MESSAGING_SENDER_ID,
   APP_ID,
   MEASURMENT_ID,
-} from "../utils/requre";
+} from "../utils/utils";
 
 const firebaseConfig = {
   apiKey: APIKEY,

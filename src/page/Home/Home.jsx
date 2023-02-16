@@ -7,12 +7,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRetweet, faLineChart } from "@fortawesome/free-solid-svg-icons";
 import style from "./Home.module.scss";
 import Chart from "../../components/Chart/Chart";
+import { useNavigate } from "react-router";
 
 const Home = () => {
   const coinIndex = useSelector((state) => state?.data?.coinIndex);
   const userCoins = useSelector((state) => state?.data?.userCoins);
   const coin = useSelector((state) => state?.data?.userCoins[coinIndex]);
   const dispatch = useDispatch();
+  const navigation = useNavigate();
   const coins = [];
 
   const priceFormatter = new Intl.NumberFormat("en-US", {
@@ -26,11 +28,16 @@ const Home = () => {
     const f = formattedNumber.replace(",", "");
     coins.push({ price: f, x: f });
   });
+  const goToCoins = () => {
+    navigation("/coins");
+  };
 
   return (
     <>
       {userCoins?.length === 0 && (
-        <p style={{ color: "red" }}>plese select the clins</p>
+        <div className={style.goToCoin}>
+          <button onClick={goToCoins}>Add Coins</button>
+        </div>
       )}
       {userCoins?.length !== 0 && (
         <div className={style.dashboard}>
@@ -88,12 +95,12 @@ const Home = () => {
                     icon={faLineChart}
                     className={style.dashboard__stake_icon}
                   />
-                  <p className={style.dashboard__stake_card_text}>
+                  <div className={style.dashboard__stake_card_text}>
                     <div className={style.dashboard__stake_card_text}>
                       <p>{coin.name} marketCap</p>
                       <h3>{priceFormatter.format(coin.marketCap)}</h3>
                     </div>
-                  </p>
+                  </div>
                 </div>
               </div>
             </div>
