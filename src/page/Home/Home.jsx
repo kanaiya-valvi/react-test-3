@@ -32,6 +32,28 @@ const Home = () => {
     navigation("/coins");
   };
 
+
+    const changeFormate = (data) => {
+      const num = priceFormatter
+        .format(data)
+        .replace("$", "")
+        .replace(",", "")
+        .replace(",", "")
+        .replace(",", "")
+        .replace(",", "");
+      if (num >= 1000000) {
+        console.log(num);
+        return "$" + (num / 1000000).toFixed(1) + "M";
+      }
+      if (num >= 1000) {
+        console.log(num);
+        return "$" + (num / 1000).toFixed(1) + "K";
+      }
+      if (num <= 100) {
+        console.log(num);
+        return "$" + num;
+      }
+    };
   return (
     <>
       {userCoins?.length === 0 && (
@@ -77,7 +99,7 @@ const Home = () => {
                   />
                   <div className={style.dashboard__stake_card_text}>
                     <p>{coin.name} price</p>
-                    <h3>{priceFormatter.format(coin?.price)}</h3>
+                    <h3>{changeFormate(coin?.price)}</h3>
                   </div>
                 </div>
                 <div className={style.dashboard__stake_card}>
@@ -98,7 +120,7 @@ const Home = () => {
                   <div className={style.dashboard__stake_card_text}>
                     <div className={style.dashboard__stake_card_text}>
                       <p>{coin.name} marketCap</p>
-                      <h3>{priceFormatter.format(coin.marketCap)}</h3>
+                      <h3>{changeFormate(coin.marketCap)}</h3>
                     </div>
                   </div>
                 </div>

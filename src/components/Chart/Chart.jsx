@@ -20,7 +20,7 @@ const Chart = ({ coins }) => {
           height={400}
           data={coins}
           margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-          <Line type="monotone" dataKey="price" stroke="#8884d8" />
+          {/* <Line type="monotone" dataKey="price" stroke="#8884d8" /> */}
           <CartesianGrid stroke="#ccc" strokeDasharray="3 3" />
           <YAxis dataKey="price" />
           <XAxis />

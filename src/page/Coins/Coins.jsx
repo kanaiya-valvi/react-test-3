@@ -1,15 +1,26 @@
-import axios from "axios";
 import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useTable } from "react-table";
 import { addCoin } from "../../store/actions/actionSlice";
-import { API_KEY, BASE_URL } from "../../utils/utils";
+import Loader from "../../UI/Loader/Loader";
 import style from "./Coins.module.scss";
+import SearchCoins from "../../components/SearchCoins/SearchCoins";
+import useFetch from "../../hooks/useFetch";
+import Table from "../../components/Table/Table";
 
 const Coins = () => {
   const dispatch = useDispatch();
   const [datas, setDatas] = useState([]);
   const userCoin = useSelector((state) => state.data.userCoins);
+  const [loading, setLoading] = useState(false);
+  const dat = useFetch("coins");
+  useEffect(() => {
+    setLoading(true);
+    if (dat !== null) {
+      setLoading(false);
+      setDatas(dat.data.coins);
+    }
+  }, [datas, dat]);
+
   const addCoinHandler = (coin) => {
     if (!userCoin.includes(coin)) {
       dispatch(addCoin(coin));
@@ -18,25 +29,30 @@ const Coins = () => {
       alert("data has allredy includes in your wollate");
     }
   };
-  useEffect(() => {
-    axios
-      .get(`${BASE_URL}/coins `, {
-        Headers: {
-          "Content-Type": "application/json",
-          "x-access-token": `${API_KEY}`,
-          "X-RapidAPI-Host": "coinranking1.p.rapidapi.com",
-        },
-      })
-      .then((res) => {
-        setDatas(res.data.data.coins);
-      });
-  }, []);
+
   const priceFormatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
   });
 
-  const changeFormate = (data) => priceFormatter.format(data);
+  const changeFormate = (data) => {
+    const num = priceFormatter
+      .format(data)
+      .replace("$", "")
+      .replace(",", "")
+      .replace(",", "")
+      .replace(",", "")
+      .replace(",", "");
+    if (num >= 1000000) {
+      return "$" + (num / 1000000).toFixed(1) + "M";
+    }
+    if (num >= 1000) {
+      return "$" + (num / 1000).toFixed(1) + "K";
+    }
+    if (num <= 100) {
+      return "$" + num;
+    }
+  };
   const data = useMemo(() => datas, [datas]);
   // btcPrice
   const columns = useMemo(
@@ -44,6 +60,7 @@ const Coins = () => {
       {
         Header: "Rank",
         accessor: "rank",
+        Filter: "",
       },
       {
         Header: "Coin icon",
@@ -90,7 +107,9 @@ const Coins = () => {
         Header: "MarketCap",
         accessor: "marketCap",
         Cell: (tableProps) => (
-          <span>{changeFormate(tableProps.row.original.marketCap)}</span>
+          <>
+            <span>{changeFormate(tableProps.row.original.marketCap)}</span>
+          </>
         ),
       },
       {
@@ -106,34 +125,15 @@ const Coins = () => {
     [datas]
   );
 
-  const tableInstance = useTable({ columns, data });
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    tableInstance;
   return (
     <div className={style.coin}>
-      <table {...getTableProps()}>
-        <thead>
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.map((row) => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => (
-                  <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                ))}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      {loading && <Loader />}
+      {!loading && (
+        <>
+          <SearchCoins coins={datas} />
+          <Table columns={columns} data={data} />
+        </>
+      )}
     </div>
   );
 };
