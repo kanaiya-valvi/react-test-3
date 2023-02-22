@@ -40,6 +40,7 @@
       outline: none;
       font-weight: bolder;
       color: var(--selecter-text);
+      cursor: pointer;
     }
   }
   &__subheading {
@@ -61,6 +62,11 @@
     }
     &_bottom {
       padding: 2rem;
+    }
+    &_topContent {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
   }
   &__stake {
@@ -99,10 +105,31 @@
     }
   }
 }
+.removeCoin {
+  border: none;
+  background-color: #e1e1e1;
+  padding: 1rem 2rem;
+  font-weight: bolder;
+  font-size: 1.2rem;
+  border-radius: 0.4rem;
+}
 .goToCoin {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
   height: 100vh;
   width: 100%;
+  &__icon {
+    font-size: 4rem;
+  }
+  &__btn {
+    background-color: #ffff;
+    border: none;
+    font-weight: bolder;
+    padding: 2rem 3rem;
+    border-radius: 4px;
+    outline: none;
+  }
 }

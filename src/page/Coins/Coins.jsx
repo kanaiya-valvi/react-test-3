@@ -7,6 +7,7 @@ import SearchCoins from "../../components/SearchCoins/SearchCoins";
 import useFetch from "../../hooks/useFetch";
 import Table from "../../components/Table/Table";
 import AddCoin from "../../components/AddCoin/AddCoin";
+import { changeFormate } from "../../utils/priceFormatter";
 
 const Coins = () => {
   const dispatch = useDispatch();
@@ -14,24 +15,15 @@ const Coins = () => {
   const [datas, setDatas] = useState([]);
   const { userCoins } = useSelector((state) => state.data);
   const [coins, serCoins] = useState({});
+
   const dat = useFetch("coins");
 
-  // const addCoinHandler = (coin) => {
-  //   const obj = { uuid: coin.uuid, name: coin.name, iconUrl: coin.iconUrl };
-  //   if (!userCoins.some((item) => item.uuid === obj.uuid)) {
-  //     dispatch(addCoin(obj));
-  //     serCoins({ status: "success", data: obj });
-  //   } else {
-  //     serCoins({ status: "unsuccess", data: "data has allrediy exits" });
-  //   }
-  //   dispatch(hideModel());
-  // };
   const addCoinHandler = (coin) => {
     if (!userCoins.includes(coin)) {
       dispatch(addCoin(coin));
       serCoins({ status: "success", data: coin });
     } else {
-      serCoins({ status: "unsuccess", data: "data has allrediy exits" });
+      serCoins({ status: "unsuccess", data: "Coin has already exists" });
     }
     dispatch(hideModel());
   };
@@ -39,30 +31,8 @@ const Coins = () => {
     if (dat !== null) {
       setDatas(dat.data.coins);
     }
-  }, [dat, datas]);
+  }, [dat, datas, modalHide]);
 
-  const priceFormatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  });
-
-  const changeFormate = (data) => {
-    const num = priceFormatter
-      .format(data)
-      .replaceAll("$", "")
-      .replaceAll(",", "");
-    if (num >= 1000000) {
-      const amount = Math.round((num / 1000000) * 100) / 100;
-      return "$" + amount.toLocaleString() + "M";
-    }
-    if (num >= 1000) {
-      const amount = Math.round((num / 1000) * 100) / 100;
-      return "$" + amount.toLocaleString() + "K";
-    }
-    if (num <= 100) {
-      return "$" + num;
-    }
-  };
   const data = useMemo(() => datas, [datas]);
   // btcPrice
   const columns = useMemo(
@@ -112,6 +82,14 @@ const Coins = () => {
       {
         Header: "Change",
         accessor: "change",
+        Cell: (tableProps) => {
+          const valueChange = tableProps.row.original.change;
+          return (
+            <span className={valueChange < 0 ? style.red : style.green}>
+              {changeFormate(valueChange)}
+            </span>
+          );
+        },
       },
       {
         Header: "MarketCap",
@@ -137,16 +115,22 @@ const Coins = () => {
   );
 
   return (
-    <div className={style.coin}>
+    <>
       {loading && <Loader />}
       {modalHide && <AddCoin status={coins.status} coin={coins.data} />}
-      {!loading && (
-        <>
-          <SearchCoins coins={datas} />
-          <Table columns={columns} data={data} />
-        </>
-      )}
-    </div>
+      <div className={style.coin}>
+        {!loading && (
+          <div className={style.coin__container}>
+            <SearchCoins
+              coins={datas}
+              addCoin={addCoinHandler}
+              format={changeFormate}
+            />
+            <Table columns={columns} data={data} />
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 

@@ -36,11 +36,22 @@
       color: var(--sidebar-text);
     }
   }
+  &__acttion {
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+.theme {
+  width: 5rem;
+  border: none;
+  outline: none;
+  padding: 1rem;
 }
 .logout {
   background-color: transparent;
   border: none;
-  padding: 2rem;
   width: min-content;
   display: flex;
   align-items: center;

@@ -1,8 +1,9 @@
 import React, { useEffect, useMemo, useState } from "react";
-import SearchCoins from "../../components/SearchCoins/SearchCoins";
+// import SearchCoins from "../../components/SearchCoins/SearchCoins";
 import Table from "../../components/Table/Table";
 import useFetch from "../../hooks/useFetch";
 import Loader from "../../UI/Loader/Loader";
+import { changeFormate } from "../../utils/priceFormatter";
 import style from "./Exchange.module.scss";
 
 const Exchange = () => {
@@ -16,28 +17,6 @@ const Exchange = () => {
       setLoading(false);
     }
   }, [exhange]);
-  const priceFormatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  });
-
-  const changeFormate = (data) => {
-    const num = priceFormatter
-      .format(data)
-      .replaceAll("$", "")
-      .replaceAll(",", "");
-    if (num >= 1000000) {
-      const amount = Math.round((num / 1000000) * 100) / 100;
-      return "$" + amount.toLocaleString() + "M";
-    }
-    if (num >= 1000) {
-      const amount = Math.round((num / 1000) * 100) / 100;
-      return "$" + amount.toLocaleString() + "K";
-    }
-    if (num <= 100) {
-      return "$" + num;
-    }
-  };
   const data = useMemo(() => datas, [datas]);
   const columns = useMemo(
     () => [
@@ -104,7 +83,7 @@ const Exchange = () => {
       {loading && <Loader />}
       {!loading && (
         <>
-          <SearchCoins coins={datas} />
+          {/* <SearchCoins coins={datas} format={changeFormate} /> */}
           <Table columns={columns} data={data} />
         </>
       )}

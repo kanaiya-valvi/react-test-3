@@ -1,6 +1,5 @@
 .exchange {
-    max-height: 100vh;
-    display: grid;
-    grid-template-rows: min-content 1fr;
-    overflow: auto;
+  max-height: 100vh;
+  height: 100vh;
+  overflow: auto;
 }

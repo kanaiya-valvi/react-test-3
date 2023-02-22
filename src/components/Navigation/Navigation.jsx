@@ -54,8 +54,8 @@ const Navigation = () => {
       <ul className={style.nav__list}>
         <NavLik />
       </ul>
-      <div>
-        <button onClick={themeHandler} className="theme">
+      <div className={style.nav__acttion}>
+        <button onClick={themeHandler} className={style.theme}>
           {theme === "dark" ? themeLigit : themedark}
         </button>
         <button className={style.logout} onClick={logOutHandler}>

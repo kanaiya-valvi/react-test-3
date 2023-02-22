@@ -36,6 +36,16 @@ const actionSlice = createSlice({
     hideModel(state) {
       state.modalHide = !state.modalHide;
     },
+    removeCoin(state, action) {
+      if (state.userCoins.length === 0) {
+        state.userCoins = [];
+      } else {
+        state.userCoins = state.userCoins.filter(
+          (item) => item.uuid !== action.payload.uuid
+        );
+      }
+      state.coinIndex = 0;
+    },
   },
 });
 
@@ -49,4 +59,5 @@ export const {
   setTheme,
   setLoading,
   hideModel,
+  removeCoin,
 } = actionSlice.actions;

@@ -1,5 +1,18 @@
+.mainTable {
+  padding: 2rem 3rem;
+  background-color: var(--exchange-bg);
+  height: 100%;
+  &__card {
+    background-color: var(--exchange-card-bg);
+    padding: 3rem;
+    height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    border-radius: 1rem;
+  }
+}
 .table {
-  width: 100%;  
+  width: 100%;
   border: none;
   border-collapse: collapse;
   font-size: 1.4rem;
@@ -11,8 +24,30 @@
       background-color: var(--bg);
       color: #000;
     }
-    td {
+    td,
+    th {
       width: max-content;
+    }
+  }
+}
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  &__lable {
+    font-size: 1.4rem;
+  }
+  &__btn {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    button {
+      border: none;
+      padding: 1rem 2rem;
+    }
+    button[disabled] {
+      background-color: lightcyan;
     }
   }
 }

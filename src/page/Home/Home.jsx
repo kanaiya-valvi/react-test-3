@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-
-import { selectCoin } from "../../store/actions/actionSlice";
-
+import { removeCoin, selectCoin } from "../../store/actions/actionSlice";
+import Chart from "../../components/Chart/Chart";
+import useFetch from "../../hooks/useFetch";
+import Stake from "../../components/Stake/Stake";
+import { changeFormate, priceFormatter } from "../../utils/priceFormatter";
+import style from "./Home.module.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faRetweet,
   faLineChart,
   faClockRotateLeft,
   faChartPie,
   faChartBar,
+  faMagnifyingGlassDollar,
 } from "@fortawesome/free-solid-svg-icons";
-import style from "./Home.module.scss";
-import Chart from "../../components/Chart/Chart";
-import { useNavigate } from "react-router";
-import useFetch from "../../hooks/useFetch";
-import Stake from "../../components/Stake/Stake";
 
 const Home = () => {
   const { coinIndex, userCoins } = useSelector((state) => state?.data);
@@ -23,29 +24,6 @@ const Home = () => {
   const dispatch = useDispatch();
   const navigation = useNavigate();
   const coins = [];
-
-  const priceFormatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  });
-
-  const changeFormate = (data) => {
-    const num = priceFormatter
-      .format(data)
-      .replaceAll("$", "")
-      .replaceAll(",", "");
-    if (num >= 1000000) {
-      const amount = Math.round((num / 1000000) * 100) / 100;
-      return "$" + amount.toLocaleString() + "M";
-    }
-    if (num >= 1000) {
-      const amount = Math.round((num / 1000) * 100) / 100;
-      return "$" + amount.toLocaleString() + "K";
-    }
-    if (num <= 100) {
-      return "$" + num;
-    }
-  };
 
   const coinspark = coinData?.sparkline;
   coinspark?.forEach((c) => {
@@ -62,12 +40,18 @@ const Home = () => {
 
   useEffect(() => {
     setCoinData(getcoin?.data.coin);
-  }, [getcoin]);
+  }, [coinData,getcoin, userCoins, coin]);
   return (
     <>
       {userCoins?.length === 0 && (
         <div className={style.goToCoin}>
-          <button onClick={goToCoins}>Add Coins</button>
+          <FontAwesomeIcon
+            icon={faMagnifyingGlassDollar}
+            className={style.goToCoin__icon}
+          />
+          <button onClick={goToCoins} className={style.goToCoin__btn}>
+            Explore Coins
+          </button>
         </div>
       )}
       {userCoins?.length !== 0 && (
@@ -95,11 +79,16 @@ const Home = () => {
           </div>
           <div className={style.dashboard__card}>
             <div className={style.dashboard__card_top}>
-              <div>
-                <h1 className={style.dashboard__card_title}>
-                  {coinData?.name}
-                </h1>
-                <p className={style.dashboard__subheading}>Coin Staking</p>
+              <div className={style.dashboard__card_topContent}>
+                <div>
+                  <h1 className={style.dashboard__card_title}>
+                    {coinData?.name}
+                  </h1>
+                  <p className={style.dashboard__subheading}>Coin Staking</p>
+                </div>
+                <button onClick={() => dispatch(removeCoin(coin))} className={style.removeCoin}>
+                  Remove Coin
+                </button>
               </div>
               <div className={style.dashboard__stake}>
                 <div className={style.dashboard__stake_card}>

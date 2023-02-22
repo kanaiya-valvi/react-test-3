@@ -4,8 +4,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  &__icon {
-    width: 25rem;
-    width: 25rem;
+  &__spinner {
+    font-size: 3rem;
+    animation: loder 1s linear infinite;
+  }
+}
+@keyframes loder {
+  to {
+    transform: rotate(0deg);
+  }
+  from {
+    transform: rotate(-360deg);
   }
 }

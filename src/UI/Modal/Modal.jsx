@@ -16,11 +16,9 @@ const Modal = ({ children }) => {
   );
   const ModalOverlay = () => (
     <div className={style.modal__content}>
-      <p className={style.modal__clase} onClick={closeModel}>
+      <button className={style.modal__clase} onClick={closeModel}>
         &times;
-      </p>
-      {/* <img src={ModalCoin.iconUrl} alt="" />
-      <p>{ModalCoin.name}</p> */}
+      </button>     
       {children}
     </div>
   );

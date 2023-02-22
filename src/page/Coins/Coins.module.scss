@@ -1,11 +1,13 @@
 .coin {
   max-height: 100vh;
-  display: grid;
-  grid-template-rows: min-content 1fr;
+  height: 100vh;
   overflow: auto;
+  &__container{    
+    height:100%;    
+  }
 }
 .red {
-  color: red;
+  color: rgba(255, 0, 0, 0.578);
   font-weight: bolder;
 }
 .green {
