@@ -2,8 +2,8 @@
   max-height: 100vh;
   height: 100vh;
   overflow: auto;
-  &__container{    
-    height:100%;    
+  &__container {
+    height: 100%;
   }
 }
 .red {
@@ -13,4 +13,12 @@
 .green {
   font-weight: bolder;
   color: green;
+}
+.addcoin {
+  background-color: #5c5cff9f;
+  color: #000;
+  font-weight: bolder;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.2rem;
 }

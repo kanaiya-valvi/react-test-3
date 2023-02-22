@@ -9,9 +9,9 @@ import {
 } from "react-table";
 import GlobalFillter from "../Fillter/GlobalFillter";
 import style from "./Table.module.scss";
-function Table({ columns, data }) {
+function Table({ columns, data, search }) {
   const tableInstance = useTable(
-    { columns, data },
+    { columns, data, disableSortRemove: true, defaultCanSort: true },
     useFilters,
     useGlobalFilter,
     useSortBy,
@@ -39,8 +39,18 @@ function Table({ columns, data }) {
   return (
     <div className={style.mainTable}>
       <div className={style.mainTable__card}>
-        <GlobalFillter filter={globalFilter} setFilter={setGlobalFilter} />
-        <div>
+        <div className={style.mainTable__filter}>
+          <GlobalFillter filter={globalFilter} setFilter={setGlobalFilter} />
+          {search && (
+            <button
+              onClick={() => {
+                search();
+              }}>
+              search
+            </button>
+          )}
+        </div>
+        <div className={style.responsiveTable}>
           <table {...getTableProps()} className={style.table}>
             <thead>
               {headerGroups.map((headerGroup) => (

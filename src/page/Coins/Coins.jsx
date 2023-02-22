@@ -14,18 +14,24 @@ const Coins = () => {
   const { modalHide, loading } = useSelector((state) => state.data);
   const [datas, setDatas] = useState([]);
   const { userCoins } = useSelector((state) => state.data);
-  const [coins, serCoins] = useState({});
+  const [coins, setCoins] = useState({});
+  const [search, setSearch] = useState(false);
 
   const dat = useFetch("coins");
 
   const addCoinHandler = (coin) => {
     if (!userCoins.includes(coin)) {
       dispatch(addCoin(coin));
-      serCoins({ status: "success", data: coin });
+      setCoins({ status: "success", data: coin });
     } else {
-      serCoins({ status: "unsuccess", data: "Coin has already exists" });
+      setCoins({ status: "unsuccess", data: "Coin has already exists" });
     }
     dispatch(hideModel());
+  };
+
+  const searchHandler = () => {
+    if (search) setSearch(false);
+    else setSearch(true);
   };
   useEffect(() => {
     if (dat !== null) {
@@ -40,6 +46,7 @@ const Coins = () => {
       {
         Header: "Rank",
         accessor: "rank",
+        disableSortRemove: true,
       },
       {
         Header: "Coin icon",
@@ -104,7 +111,9 @@ const Coins = () => {
         Header: "ADD Button",
         accessor: "",
         Cell: (tableProps) => (
-          <button onClick={() => addCoinHandler(tableProps.row.original)}>
+          <button
+            className={style.addcoin}
+            onClick={() => addCoinHandler(tableProps.row.original)}>
             Add Coin
           </button>
         ),
@@ -121,12 +130,17 @@ const Coins = () => {
       <div className={style.coin}>
         {!loading && (
           <div className={style.coin__container}>
-            <SearchCoins
-              coins={datas}
-              addCoin={addCoinHandler}
-              format={changeFormate}
-            />
-            <Table columns={columns} data={data} />
+            {search && (
+              <SearchCoins
+                close={searchHandler}
+                coins={datas}
+                addCoin={addCoinHandler}
+                format={changeFormate}
+              />
+            )}
+            {!search && (
+              <Table search={searchHandler} columns={columns} data={data} />
+            )}
           </div>
         )}
       </div>

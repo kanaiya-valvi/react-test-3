@@ -9,6 +9,8 @@
   }
   &__bar {
     padding: 1rem 3rem;
+    display: grid;
+    grid-template-columns: 1fr max-content;
   }
   &__input {
     width: 100%;

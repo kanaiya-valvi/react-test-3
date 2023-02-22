@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import style from "./SearchCoins.module.scss";
 
-const SearchCoins = ({ coins, addCoin, format }) => {
+const SearchCoins = ({ coins, addCoin, format, close }) => {
   const [searchCoin, setSearchCoin] = useState([]);
   const [search, setSearch] = useState("");
 
@@ -36,6 +36,12 @@ const SearchCoins = ({ coins, addCoin, format }) => {
               SearchCoin(e);
             }}
           />
+          <button
+            onClick={() => {
+              close();
+            }}>
+            clase search
+          </button>
         </div>
         <div className={style.mainTable}>
           <table className={style.table}>

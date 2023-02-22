@@ -6,6 +6,7 @@ const Settings = () => {
   const [email, setEmail] = useState("");
   const auth = getAuth();
   const dispatch = useDispatch();
+
   const changePasswordHandler = () => {
     sendPasswordResetEmail(auth, email)
       .then(() => {
