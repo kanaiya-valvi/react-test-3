@@ -1,17 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import NavLik from "./NavLik";
 import { signOut } from "firebase/auth";
 
 import style from "./Navigation.module.scss";
 import { auth } from "../../auth/firebase";
-import { useDispatch } from "react-redux";
-import { signOutAuth } from "../../store/actions/actionSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { setTheme, signOutAuth } from "../../store/actions/actionSlice";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBitcoinSign,
   faArrowRightFromBracket,
+  faSun,
+  faMoon,
 } from "@fortawesome/free-solid-svg-icons";
 // import {
 //   solid,
@@ -22,6 +24,7 @@ import {
 
 const Navigation = () => {
   const dispatch = useDispatch();
+  const { theme } = useSelector((state) => state.data);
   const logOutHandler = () => {
     signOut(auth)
       .then(() => {
@@ -30,6 +33,12 @@ const Navigation = () => {
       })
       .catch((error) => alert(error.message));
     // .finally(() => setLoading(false));
+  };
+
+  let themeLigit = <FontAwesomeIcon icon={faSun} />;
+  let themedark = <FontAwesomeIcon icon={faMoon} />;
+  const themeHandler = () => {
+    dispatch(setTheme());
   };
   return (
     <nav className={style.nav}>
@@ -45,13 +54,18 @@ const Navigation = () => {
       <ul className={style.nav__list}>
         <NavLik />
       </ul>
-      <button className={style.logout} onClick={logOutHandler}>
-        <FontAwesomeIcon
-          icon={faArrowRightFromBracket}
-          className={style.nav__logo_icon}
-        />
-        Logout
-      </button>
+      <div>
+        <button onClick={themeHandler} className="theme">
+          {theme === "dark" ? themeLigit : themedark}
+        </button>
+        <button className={style.logout} onClick={logOutHandler}>
+          <FontAwesomeIcon
+            icon={faArrowRightFromBracket}
+            className={style.nav__logo_icon}
+          />
+          Logout
+        </button>
+      </div>
     </nav>
   );
 };

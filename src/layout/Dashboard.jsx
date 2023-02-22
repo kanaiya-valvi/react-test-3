@@ -7,6 +7,7 @@ import Exchange from "../page/Exchange/Exchange";
 import Home from "../page/Home/Home";
 import Settings from "../page/Setting/Settings";
 import Stats from "../page/Stats/Stats";
+
 import style from "./Dashboard.module.scss";
 
 const Dashboard = () => {

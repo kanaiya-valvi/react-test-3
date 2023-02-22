@@ -4,7 +4,6 @@ import { singIn } from "../store/actions/actionSlice";
 import {
   signInWithPopup,
   createUserWithEmailAndPassword,
-//   onAuthStateChanged,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth, provider } from "./firebase";
@@ -14,10 +13,9 @@ import { useNavigate } from "react-router";
 const Auth = () => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");  
+  const [password, setPassword] = useState("");
 
   const navigation = useNavigate();
-
   const googleLoginHandler = (e) => {
     e.preventDefault();
     signInWithPopup(auth, provider).then((result) => {
@@ -27,10 +25,10 @@ const Auth = () => {
     });
     navigation("/");
   };
-  const signInHandler = async (e) => {    
+  const signInHandler = async (e) => {
     e.preventDefault();
     await signInWithEmailAndPassword(auth, email, password)
-      .then((result) => {        
+      .then((result) => {
         const data = JSON.stringify(result.user);
         dispatch(singIn(data));
         localStorage.setItem("user", data);

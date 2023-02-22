@@ -1,34 +1,39 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addCoin } from "../../store/actions/actionSlice";
+import { addCoin, hideModel } from "../../store/actions/actionSlice";
 import Loader from "../../UI/Loader/Loader";
 import style from "./Coins.module.scss";
 import SearchCoins from "../../components/SearchCoins/SearchCoins";
 import useFetch from "../../hooks/useFetch";
 import Table from "../../components/Table/Table";
+import AddCoin from "../../components/AddCoin/AddCoin";
 
 const Coins = () => {
   const dispatch = useDispatch();
+  const { modalHide } = useSelector((state) => state.data);
   const [datas, setDatas] = useState([]);
-  const userCoin = useSelector((state) => state.data.userCoins);
+  const { userCoins } = useSelector((state) => state.data);
   const [loading, setLoading] = useState(false);
+  const [coins, serCoins] = useState({});
   const dat = useFetch("coins");
+
+  const addCoinHandler = (coin) => {
+    const obj = { uuid: coin.uuid, name: coin.name, iconUrl: coin.iconUrl };
+    if (!userCoins.some((item) => item.uuid === obj.uuid)) {
+      dispatch(addCoin(obj));
+      serCoins({ status: "success", data: obj });
+    } else {
+      serCoins({ status: "unsuccess", data: "data has allrediy exits" });
+    }
+    dispatch(hideModel());
+  };
   useEffect(() => {
     setLoading(true);
     if (dat !== null) {
       setLoading(false);
       setDatas(dat.data.coins);
     }
-  }, [datas, dat]);
-
-  const addCoinHandler = (coin) => {
-    if (!userCoin.includes(coin)) {
-      dispatch(addCoin(coin));
-      alert("data added success fully");
-    } else {
-      alert("data has allredy includes in your wollate");
-    }
-  };
+  }, [dat, datas]);
 
   const priceFormatter = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -38,16 +43,15 @@ const Coins = () => {
   const changeFormate = (data) => {
     const num = priceFormatter
       .format(data)
-      .replace("$", "")
-      .replace(",", "")
-      .replace(",", "")
-      .replace(",", "")
-      .replace(",", "");
+      .replaceAll("$", "")
+      .replaceAll(",", "");
     if (num >= 1000000) {
-      return "$" + (num / 1000000).toFixed(1) + "M";
+      const amount = Math.round((num / 1000000) * 100) / 100;
+      return "$" + amount.toLocaleString() + "M";
     }
     if (num >= 1000) {
-      return "$" + (num / 1000).toFixed(1) + "K";
+      const amount = Math.round((num / 1000) * 100) / 100;
+      return "$" + amount.toLocaleString() + "K";
     }
     if (num <= 100) {
       return "$" + num;
@@ -60,7 +64,6 @@ const Coins = () => {
       {
         Header: "Rank",
         accessor: "rank",
-        Filter: "",
       },
       {
         Header: "Coin icon",
@@ -68,6 +71,7 @@ const Coins = () => {
         Cell: (tableProps) => (
           <img src={tableProps.row.original.iconUrl} alt="Player" />
         ),
+        disableSortBy: true,
       },
       {
         Header: "Coin Symbol",
@@ -120,14 +124,16 @@ const Coins = () => {
             Add Coin
           </button>
         ),
+        disableSortBy: true,
       },
     ],
-    [datas]
+    [datas, addCoinHandler, changeFormate, userCoins]
   );
 
   return (
     <div className={style.coin}>
       {loading && <Loader />}
+      {modalHide && <AddCoin status={coins.status} coin={coins.data} />}
       {!loading && (
         <>
           <SearchCoins coins={datas} />

@@ -32,7 +32,7 @@ const Stats = () => {
                     <img
                       className={style.stats__image}
                       src={item.iconUrl}
-                      alt=""
+                      alt={item.name}
                     />
                     <span className={style.stats__coinName}>{item.name}</span>
                     <a
@@ -55,7 +55,7 @@ const Stats = () => {
                     <img
                       className={style.stats__image}
                       src={item.iconUrl}
-                      alt=""
+                      alt={item.name}
                     />
                     <span className={style.stats__coinName}>{item.name}</span>
                     <a

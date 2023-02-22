@@ -44,23 +44,19 @@ const SearchCoins = ({ coins }) => {
   const changeFormate = (data) => {
     const num = priceFormatter
       .format(data)
-      .replace("$", "")
-      .replace(",", "")
-      .replace(",", "")
-      .replace(",", "")
-      .replace(",", "");
-    console.log(num);
+      .replaceAll("$", "")
+      .replaceAll(",", "");
+
     if (num >= 1000000) {
-      console.log(num);
-      return (num / 1000000).toFixed(1) + "M";
+      const amount = Math.round((num / 1000000) * 100) / 100;
+      return "$" + amount.toLocaleString() + "M";
     }
     if (num >= 1000) {
-      console.log(num);
-      return (num / 1000).toFixed(1) + "K";
+      const amount = Math.round((num / 1000) * 100) / 100;
+      return "$" + amount.toLocaleString() + "K";
     }
     if (num <= 100) {
-      console.log(num);
-      return num;
+      return "$" + num;
     }
   };
   return (
@@ -79,7 +75,12 @@ const SearchCoins = ({ coins }) => {
             <tr key={item.uuid}>
               <td>{item.rank}</td>
               <td>
-                <img width={25} height={25} src={item.iconUrl} alt="Player" />
+                <img
+                  width={25}
+                  height={25}
+                  src={item.iconUrl}
+                  alt={item.name}
+                />
               </td>
               <td>{item.symbol}</td>
               <td>{item.name}</td>

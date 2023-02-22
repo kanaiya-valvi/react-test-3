@@ -24,7 +24,7 @@ const Chart = ({ coins }) => {
           <CartesianGrid stroke="#ccc" strokeDasharray="3 3" />
           <YAxis dataKey="price" />
           <XAxis />
-          <Tooltip dataKey="x" />
+          <Tooltip dataKey="tool" />
           <Area type="monotone" dataKey="price" fill="#77a9f33b" />
           <Legend />
         </ComposedChart>

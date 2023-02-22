@@ -2,6 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const inisialValue = {
   isAuthe: false,
+  loading: false,
+  modalHide: false,
+  theme: "",
   user: [],
   userCoins: [],
   coinIndex: 0,
@@ -24,10 +27,26 @@ const actionSlice = createSlice({
     selectCoin(state, action) {
       state.coinIndex = action.payload;
     },
+    setTheme(state) {
+      state.theme = state.theme === "dark" ? "" : "dark";
+    },
+    setLoading(state) {
+      state.loading = !state.loading;
+    },
+    hideModel(state) {
+      state.modalHide = !state.modalHide;
+    },
   },
 });
 
 export default actionSlice.reducer;
 
-export const { singIn, signOutAuth, getCoins, addCoin, selectCoin } =
-  actionSlice.actions;
+export const {
+  singIn,
+  signOutAuth,
+  addCoin,
+  selectCoin,
+  setTheme,
+  setLoading,
+  hideModel,
+} = actionSlice.actions;

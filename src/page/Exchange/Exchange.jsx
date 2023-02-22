@@ -24,16 +24,15 @@ const Exchange = () => {
   const changeFormate = (data) => {
     const num = priceFormatter
       .format(data)
-      .replace("$", "")
-      .replace(",", "")
-      .replace(",", "")
-      .replace(",", "")
-      .replace(",", "");
+      .replaceAll("$", "")
+      .replaceAll(",", "");
     if (num >= 1000000) {
-      return "$" + (num / 1000000).toFixed(1) + "M";
+      const amount = Math.round((num / 1000000) * 100) / 100;
+      return "$" + amount.toLocaleString() + "M";
     }
     if (num >= 1000) {
-      return "$" + (num / 1000).toFixed(1) + "K";
+      const amount = Math.round((num / 1000) * 100) / 100;
+      return "$" + amount.toLocaleString() + "K";
     }
     if (num <= 100) {
       return "$" + num;
