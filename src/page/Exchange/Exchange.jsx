@@ -7,8 +7,8 @@ import style from "./Exchange.module.scss";
 
 const Exchange = () => {
   const [datas, setDatas] = useState([]);
-  const exhange = useFetch("exchange/-zdvbieRdZ/coins");
   const [loading, setLoading] = useState(false);
+  const exhange = useFetch("exchange/-zdvbieRdZ/coins");
   useEffect(() => {
     setLoading(true);
     if (exhange !== null) {

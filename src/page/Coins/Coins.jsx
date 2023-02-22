@@ -10,27 +10,33 @@ import AddCoin from "../../components/AddCoin/AddCoin";
 
 const Coins = () => {
   const dispatch = useDispatch();
-  const { modalHide } = useSelector((state) => state.data);
+  const { modalHide, loading } = useSelector((state) => state.data);
   const [datas, setDatas] = useState([]);
   const { userCoins } = useSelector((state) => state.data);
-  const [loading, setLoading] = useState(false);
   const [coins, serCoins] = useState({});
   const dat = useFetch("coins");
 
+  // const addCoinHandler = (coin) => {
+  //   const obj = { uuid: coin.uuid, name: coin.name, iconUrl: coin.iconUrl };
+  //   if (!userCoins.some((item) => item.uuid === obj.uuid)) {
+  //     dispatch(addCoin(obj));
+  //     serCoins({ status: "success", data: obj });
+  //   } else {
+  //     serCoins({ status: "unsuccess", data: "data has allrediy exits" });
+  //   }
+  //   dispatch(hideModel());
+  // };
   const addCoinHandler = (coin) => {
-    const obj = { uuid: coin.uuid, name: coin.name, iconUrl: coin.iconUrl };
-    if (!userCoins.some((item) => item.uuid === obj.uuid)) {
-      dispatch(addCoin(obj));
-      serCoins({ status: "success", data: obj });
+    if (!userCoins.includes(coin)) {
+      dispatch(addCoin(coin));
+      serCoins({ status: "success", data: coin });
     } else {
       serCoins({ status: "unsuccess", data: "data has allrediy exits" });
     }
     dispatch(hideModel());
   };
   useEffect(() => {
-    setLoading(true);
     if (dat !== null) {
-      setLoading(false);
       setDatas(dat.data.coins);
     }
   }, [dat, datas]);
@@ -127,7 +133,7 @@ const Coins = () => {
         disableSortBy: true,
       },
     ],
-    [datas, addCoinHandler, changeFormate, userCoins]
+    [userCoins]
   );
 
   return (
