@@ -14,6 +14,7 @@ import {
   faArrowRightFromBracket,
   faSun,
   faMoon,
+  faBars,
 } from "@fortawesome/free-solid-svg-icons";
 // import {
 //   solid,
@@ -25,6 +26,7 @@ import {
 const Navigation = () => {
   const dispatch = useDispatch();
   const { theme } = useSelector((state) => state.data);
+  const [navBarHide, setNavBarHide] = useState("");
   const logOutHandler = () => {
     signOut(auth)
       .then(() => {
@@ -40,30 +42,39 @@ const Navigation = () => {
   const themeHandler = () => {
     dispatch(setTheme());
   };
+
+  const navBarToggle = () => {
+    navBarHide !== "hide" ? setNavBarHide("hide") : setNavBarHide("");
+  };
   return (
-    <nav className={style.nav}>
+    <nav className={style.nav} collapsible={navBarHide}>
       <div className={style.nav__logo}>
+        <button className={style.nav__collapse} onClick={navBarToggle}>
+          <FontAwesomeIcon icon={faBars} />
+        </button>
         <NavLink to="/" className={style.nav__logo_link}>
           <FontAwesomeIcon
             icon={faBitcoinSign}
             className={style.nav__logo_icon}
           />
-          BITCO
+          <span>BITCO</span>
         </NavLink>
       </div>
       <ul className={style.nav__list}>
         <NavLik />
       </ul>
       <div className={style.nav__acttion}>
-        <button onClick={themeHandler} className={style.theme}>
-          {theme === "dark" ? themeLigit : themedark}
-        </button>
+        <div className={style.toggle} them={theme} onClick={themeHandler}>
+          <div className={style.theme}>
+            {theme === "dark" ? themeLigit : themedark}
+          </div>
+        </div>
         <button className={style.logout} onClick={logOutHandler}>
           <FontAwesomeIcon
             icon={faArrowRightFromBracket}
-            className={style.nav__logo_icon}
+            className={style.nav__link_icon}
           />
-          Logout
+          <span>Logout</span>
         </button>
       </div>
     </nav>

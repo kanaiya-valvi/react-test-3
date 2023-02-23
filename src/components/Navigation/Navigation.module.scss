@@ -2,53 +2,74 @@
   background-color: var(--background);
   display: grid;
   grid-template-rows: auto 1fr;
+  transition: all 0.2s;
+  &__collapse {
+    background-color: var(--background);
+    font-size: 1.6rem;
+    border: none;
+    color: var(--sidebar-text);
+    position: absolute;
+    right: 0%;
+    height: 3rem;
+    width: 3rem;
+    top: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(50%, -50%);
+    border-radius: 20rem;
+  }
   &__logo {
-    padding: 2rem;
+    padding: 2rem 3rem;
     display: flex;
     align-items: center;
     font-size: 3rem;
     font-weight: bolder;
+    position: relative;
+    transition: all 0.2s;
     // border-bottom: 1px solid var(--text-secondary);
     &_link {
       color: var(--sidebar-text);
       display: flex;
-      gap: 1rem;
       align-items: center;
+      gap: 2rem;
       justify-content: center;
+    }
+    &_icon {
+      font-size: 3rem;
     }
   }
   &__list {
     display: flex;
     flex-direction: column;
-    margin-top: 1rem;
     color: var(--sidebar-text);
   }
   &__link {
     font-size: 1.8rem;
     color: var(--black);
-    display: flex;
-    gap: 1rem;
-    align-items: center;
+    display: grid;
+    grid-template-columns: auto 100%;
+    gap: 2rem;
+    justify-content: start;
     transition: all 0.2s;
-    padding: 1.5rem 2rem;
+    padding: 1.5rem 3rem;
     color: var(--sidebar-link);
+    &_icon {
+      font-size: 2rem;
+    }
     &:hover {
       color: var(--sidebar-text);
     }
   }
   &__acttion {
-    padding: 2rem;
+    padding: 2rem 3rem;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    gap: 2rem;
+    flex-direction: column;
+    justify-content: flex-start;
   }
 }
-.theme {
-  width: 5rem;
-  border: none;
-  outline: none;
-  padding: 1rem;
-}
+
 .logout {
   background-color: transparent;
   border: none;
@@ -62,5 +83,69 @@
   color: var(--sidebar-text);
   &:hover {
     color: var(--sidebar-link);
+  }
+}
+span {
+  width: auto;
+  visibility: 1;
+}
+[collapsible="hide"] {
+  span {
+    overflow-x: hidden;
+    width: 0 !important;
+    visibility: 1;
+  }
+  .nav {
+    &__link {
+      grid-template-columns: auto 0%;
+      gap: 0;
+      transition: all 0.2s;
+      padding: 1.5rem 2rem;
+    }
+    &__logo {
+      justify-content: start;
+      padding: 2rem;
+      &_link {
+        gap: 0;
+      }
+    }
+    &__acttion {
+      padding: 2rem;
+    }
+  }
+}
+
+.toggle {
+  width: 4rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  background-color: red;
+  transition: all .2s;
+  border-radius: 100px;
+  position: relative;
+  .theme {
+    position: absolute;
+    height: 2rem;
+    width: 2rem;
+    font-size: 1.5rem;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100px;
+    left: 100%;
+    transform: translate(-100%, 0%);
+    transition: all .2s;
+  }
+}
+[them="dark"] {
+  background-color: #fff;
+  transition: all .2s;
+  .theme {
+    background-color: red;
+    left: 0;
+    transition: all .2s;
+    transform: translate(0%, 0%);
   }
 }

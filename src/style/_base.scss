@@ -28,19 +28,20 @@ main {
 }
 
 ::-webkit-scrollbar {
-  width: 0px;
+  width: 2px;
+  height: 2px;
   margin-right: 0.1rem;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: var(--text-secondary);
+  background: #000;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: var(--white);
-  border-radius: 10rem;
+  border-radius: 10rem;background: red;
 }
 
 /* Handle on hover */
