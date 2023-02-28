@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import style from "./SearchCoins.module.scss";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+
 const SearchCoins = ({ coins, addCoin, format, close }) => {
   const [searchCoin, setSearchCoin] = useState([]);
   const [search, setSearch] = useState("");
@@ -39,8 +42,9 @@ const SearchCoins = ({ coins, addCoin, format, close }) => {
           <button
             onClick={() => {
               close();
-            }}>
-            clase search
+            }}
+            className={style.search__close}>
+            <FontAwesomeIcon icon={faXmark} />
           </button>
         </div>
         <div className={style.mainTable}>
@@ -62,7 +66,11 @@ const SearchCoins = ({ coins, addCoin, format, close }) => {
                   <td>{format(item.price)}</td>
                   <td>{format(item.marketCap)}</td>
                   <td>
-                    <button onClick={() => addCoin(item)}>Add Coin</button>
+                    <button
+                      onClick={() => addCoin(item)}
+                      className={style.addcoin}>
+                      Add Coin
+                    </button>
                   </td>
                 </tr>
               ))}

@@ -7,18 +7,21 @@
   }
 }
 .red {
-  color: rgba(255, 0, 0, 0.578);
+  color: var(--brightred);
   font-weight: bolder;
 }
 .green {
   font-weight: bolder;
-  color: green;
+  color: var(--limegreen);
 }
 .addcoin {
-  background-color: #5c5cff9f;
-  color: #000;
+  background-color: var(--btn-add);
+  color: var(--btn-add-text);
   font-weight: bolder;
   border: none;
   padding: 0.5rem 1rem;
-  border-radius: 0.2rem;
+  transition: .2s;
+  border-radius: 0.2rem;&:hover{
+    background-color: var(--btn-add-hover);
+  }
 }

@@ -18,8 +18,10 @@ const Stats = () => {
     <>
       <div className={style.stats}>
         <div className={style.stats__header}>
-          <h2>State</h2>
-          <p>global statistics tell about the data available on coinranking</p>
+          <h2 className={style.stats__header_title}>State</h2>
+          <span className={style.stats__header_subtitle}>
+            global statistics tell about the data available on coinranking
+          </span>
         </div>
         <div className={style.stats__content}>
           <div className={style.stats__bestcoin}>

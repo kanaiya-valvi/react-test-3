@@ -1,31 +1,38 @@
 .stats {
   padding: 2rem;
-  background: var(--stats-bg);
   display: grid;
   gap: 2rem;
   &__header {
-    background-color: var(--stats-content);
+    background: var(--card-bg);
     padding: 2rem;
     border-radius: 0.6rem;
+    &_title {
+      color: var(--text-color);
+      font-size: 2.4rem;
+    }
+    &_subtitle {
+      color: var(--text-color2);
+      font-size: 1.4rem;      
+    }
   }
   &__content {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
   }
-  &__newcoin {
-    background-color: var(--stats-content);
+  &__bestcoin {
+    background: var(--card-bg);
     padding: 2rem;
     border-radius: 0.6rem;
   }
-  &__bestcoin {
-    background-color: var(--stats-content);
+  &__newcoin {
+    background: var(--card-bg);
     padding: 2rem;
     border-radius: 0.6rem;
   }
   &__title {
     font-size: 2rem;
-    color: var(--stats-heading);
+    color: var(--text-color);
   }
   &__image {
     width: 3rem;
@@ -40,6 +47,7 @@
   }
   &__coinName {
     font-size: 1.4rem;
+    color: var(--text-color2);
   }
   &__coinUrl {
     font-size: 1.4rem;

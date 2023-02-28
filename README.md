@@ -43,6 +43,8 @@ charts to visulize data
 6. settings
 
 <!-- rechart -->
+https://www.youtube.com/watch?v=iL4irerdGdU
+
 https://recharts.org/en-US/examples/CustomizedLabelLineChart
 
 https://www.youtube.com/watch?v=YwP4NAZGskg&list=PLC3y8-rFHvwgWTSrDiwmUsl4ZvipOw9Cz

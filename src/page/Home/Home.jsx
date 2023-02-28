@@ -40,7 +40,7 @@ const Home = () => {
 
   useEffect(() => {
     setCoinData(getcoin?.data.coin);
-  }, [coinData,getcoin, userCoins, coin]);
+  }, [coinData, getcoin, userCoins, coin]);
   return (
     <>
       {userCoins?.length === 0 && (
@@ -86,7 +86,9 @@ const Home = () => {
                   </h1>
                   <p className={style.dashboard__subheading}>Coin Staking</p>
                 </div>
-                <button onClick={() => dispatch(removeCoin(coin))} className={style.removeCoin}>
+                <button
+                  onClick={() => dispatch(removeCoin(coin))}
+                  className={style.removeCoin}>
                   Remove Coin
                 </button>
               </div>
@@ -142,11 +144,14 @@ const Home = () => {
             </div>
           </div>
           <div className={style.dashboard__card}>
-            <div
-              dangerouslySetInnerHTML={{
-                __html: `${coinData?.description}`,
-              }}></div>
-          </div>
+            <div className={style.dashboard__coin_discription}>
+              <h1>Description</h1>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: `${coinData?.description}`,
+                }}></div>
+            </div>
+          </div>  
         </div>
       )}
     </>

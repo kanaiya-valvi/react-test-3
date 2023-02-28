@@ -70,7 +70,13 @@ const Exchange = () => {
         Header: "ADD Button",
         accessor: "",
         Cell: (tableProps) => (
-          <a href={tableProps.row.original.coinrankingUrl}>View</a>
+          <button className={style.exchange__button}>
+            <a
+              href={tableProps.row.original.coinrankingUrl}
+              className={style.exchange__link}>
+              View
+            </a>
+          </button>
         ),
         disableSortBy: true,
       },
@@ -82,10 +88,10 @@ const Exchange = () => {
     <div className={style.exchange}>
       {loading && <Loader />}
       {!loading && (
-        <>
+        <div className={style.exchange__container}>
           {/* <SearchCoins coins={datas} format={changeFormate} /> */}
           <Table columns={columns} data={data} />
-        </>
+        </div>
       )}
     </div>
   );

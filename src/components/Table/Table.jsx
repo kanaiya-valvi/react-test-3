@@ -8,6 +8,16 @@ import {
   useFilters,
 } from "react-table";
 import GlobalFillter from "../Fillter/GlobalFillter";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faAngleLeft,
+  faAnglesLeft,
+  faAngleRight,
+  faAnglesRight,
+  faAngleUp,
+  faAngleDown,
+  faSearch,
+} from "@fortawesome/free-solid-svg-icons";
 import style from "./Table.module.scss";
 function Table({ columns, data, search }) {
   const tableInstance = useTable(
@@ -45,8 +55,9 @@ function Table({ columns, data, search }) {
             <button
               onClick={() => {
                 search();
-              }}>
-              search
+              }}
+              className={style.mainTable__search_btn}>
+              <FontAwesomeIcon icon={faSearch} />
             </button>
           )}
         </div>
@@ -62,12 +73,22 @@ function Table({ columns, data, search }) {
                     <th
                       {...column.getHeaderProps(column.getSortByToggleProps())}>
                       {column.render("Header")}
-                      <span>
-                        {column.isSorted
-                          ? column.isSortedDesc
-                            ? "↑"
-                            : "↓"
-                          : ""}
+                      <span className={style.sorted}>
+                        {column.isSorted ? (
+                          column.isSortedDesc ? (
+                            <FontAwesomeIcon
+                              icon={faAngleUp}
+                              className={style.sorted__icon}
+                            />
+                          ) : (
+                            <FontAwesomeIcon
+                              icon={faAngleDown}
+                              className={style.sorted__icon}
+                            />
+                          )
+                        ) : (
+                          ""
+                        )}
                       </span>
                     </th>
                   ))}
@@ -91,10 +112,10 @@ function Table({ columns, data, search }) {
         <div className={style.pagination}>
           <div className={style.pagination__btn}>
             <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-              {"<<"}
+              <FontAwesomeIcon icon={faAnglesLeft} />
             </button>{" "}
             <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-              {"<"}
+              <FontAwesomeIcon icon={faAngleLeft} />
             </button>
           </div>
           <div className={style.pagination__lable}>
@@ -107,12 +128,12 @@ function Table({ columns, data, search }) {
           </div>
           <div className={style.pagination__btn}>
             <button onClick={() => nextPage()} disabled={!canNextPage}>
-              {">"}
+              <FontAwesomeIcon icon={faAngleRight} />
             </button>{" "}
             <button
               onClick={() => gotoPage(pageCount - 1)}
               disabled={!canNextPage}>
-              {">>"}
+              <FontAwesomeIcon icon={faAnglesRight} />
             </button>
           </div>
           {/* <span>

@@ -1,20 +1,18 @@
 .dashboard {
   min-height: 100vh;
   max-height: 100vh;
-  background-color: var(--bg);
   padding: 2rem 4rem;
-  display: grid;
-  grid-template-rows: auto auto 1fr;
-  gap: 2rem;
+  display: grid;    grid-auto-rows: min-content;
+  gap: 3rem;
   overflow-y: auto;
   &__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 1rem 2rem;
+    color: var(--text-color);
     &_heading {
       font-size: 3rem;
-      color: var(--dashboard-heading);
     }
     &_form {
       display: flex;
@@ -22,10 +20,10 @@
       align-items: center;
       padding: 1rem 2rem;
       border-radius: 10rem;
-      background-color: var(--selecter-bg);
       option {
-        background-color: var(--selecter-bg);
-        color: var(--selecter-text);
+        // after same change
+        // background-color: var(--selecter-bg);
+        // color: var(--selecter-text);
       }
     }
     &_formImg {
@@ -39,12 +37,13 @@
       border: none;
       outline: none;
       font-weight: bolder;
-      color: var(--selecter-text);
+      color: var(--text-color);
+      background-color: var(--card-bg);
       cursor: pointer;
     }
   }
   &__subheading {
-    color: var(--dashboard-subheading);
+    color: var(--light-text1);
     font-size: 1.2rem;
   }
   &__card {
@@ -52,7 +51,7 @@
     padding: 1rem;
     border-radius: 1.2rem;
     &_title {
-      color: var(--card-heading);
+      color: var(--text-color);
       font-size: 2rem;
     }
     &_top {
@@ -84,8 +83,8 @@
       width: 3rem;
     }
     &_card {
-      background-color: var(--stack-bg);
-      color: var(--stack-text);
+      border: 1px solid var(--text-color);
+      color: var(--text-color2);
       align-items: center;
       gap: 2rem;
       padding: 2rem;
@@ -94,6 +93,14 @@
       &_text {
         font-size: 1.6rem;
       }
+    }
+  }
+  &__coin_discription {
+    padding: 1rem;
+    font-size: 1.4rem;
+    color: var(--text-color2);
+    h1 {
+      font-size: 2rem;color: var(--text-color);
     }
   }
   @keyframes stakeAnimation {

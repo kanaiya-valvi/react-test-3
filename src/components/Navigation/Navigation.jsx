@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import NavLik from "./NavLik";
+import NavLinks from "./NavLinks";
 import { signOut } from "firebase/auth";
 
 import style from "./Navigation.module.scss";
@@ -61,7 +61,7 @@ const Navigation = () => {
         </NavLink>
       </div>
       <ul className={style.nav__list}>
-        <NavLik />
+        <NavLinks />
       </ul>
       <div className={style.nav__acttion}>
         <div className={style.toggle} them={theme} onClick={themeHandler}>

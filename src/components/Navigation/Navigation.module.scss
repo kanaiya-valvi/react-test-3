@@ -1,13 +1,10 @@
 .nav {
-  background-color: var(--background);
+  background-color: var(--card-bg);
   display: grid;
   grid-template-rows: auto 1fr;
-  transition: all 0.2s;
   &__collapse {
-    background-color: var(--background);
     font-size: 1.6rem;
     border: none;
-    color: var(--sidebar-text);
     position: absolute;
     right: 0%;
     height: 3rem;
@@ -29,7 +26,7 @@
     transition: all 0.2s;
     // border-bottom: 1px solid var(--text-secondary);
     &_link {
-      color: var(--sidebar-text);
+      color: var(--text-color);
       display: flex;
       align-items: center;
       gap: 2rem;
@@ -42,23 +39,20 @@
   &__list {
     display: flex;
     flex-direction: column;
-    color: var(--sidebar-text);
+    align-items: start;
+    color: var(--text-color2);
   }
   &__link {
     font-size: 1.8rem;
-    color: var(--black);
+    color: var(--text-color2);
     display: grid;
     grid-template-columns: auto 100%;
     gap: 2rem;
     justify-content: start;
     transition: all 0.2s;
     padding: 1.5rem 3rem;
-    color: var(--sidebar-link);
     &_icon {
       font-size: 2rem;
-    }
-    &:hover {
-      color: var(--sidebar-text);
     }
   }
   &__acttion {
@@ -79,11 +73,7 @@
   gap: 1rem;
   font-weight: bolder;
   font-size: 1.6rem;
-  transition: all 0.2s;
-  color: var(--sidebar-text);
-  &:hover {
-    color: var(--sidebar-link);
-  }
+  color: var(--text-color2);
 }
 span {
   width: auto;
@@ -96,6 +86,9 @@ span {
     visibility: 1;
   }
   .nav {
+    &__list {
+      align-items: center;
+    }
     &__link {
       grid-template-columns: auto 0%;
       gap: 0;
@@ -103,7 +96,7 @@ span {
       padding: 1.5rem 2rem;
     }
     &__logo {
-      justify-content: start;
+      justify-content: center;
       padding: 2rem;
       &_link {
         gap: 0;
@@ -120,32 +113,33 @@ span {
   height: 2rem;
   display: flex;
   align-items: center;
-  background-color: red;
-  transition: all .2s;
+  transition: all 0.2s;
   border-radius: 100px;
   position: relative;
+  background-color: var(--toggle);
   .theme {
     position: absolute;
     height: 2rem;
     width: 2rem;
     font-size: 1.5rem;
-    background-color: #fff;
+    background-color: var(--toggle-button);
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 100px;
     left: 100%;
     transform: translate(-100%, 0%);
-    transition: all .2s;
+    transition: all 0.2s;
   }
 }
 [them="dark"] {
-  background-color: #fff;
-  transition: all .2s;
+  background-color: var(--toggle-bg);
+  transition: all 0.2s;
   .theme {
-    background-color: red;
+    background-color: var(--toggle-button);
     left: 0;
-    transition: all .2s;
+    color: var(--btn-primary  );
+    transition: all 0.2s;
     transform: translate(0%, 0%);
   }
 }

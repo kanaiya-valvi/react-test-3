@@ -2,4 +2,24 @@
   max-height: 100vh;
   height: 100vh;
   overflow: auto;
+  &__container {
+    height: 100%;
+  }
+  &__button {
+    background-color: var(--btn-add);
+    color: var(--btn-add-text);
+    font-weight: bolder;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.2rem;
+  }
+  &__link:link,
+  &__link:visited {
+    background-color: var(--btn-add);
+    color: var(--btn-add-text);
+    border-radius: 0.2rem;
+    display: grid;
+    align-items: center;
+    justify-self: center;
+  }
 }
