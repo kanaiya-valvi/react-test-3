@@ -7,8 +7,7 @@ import { signOutAuth, singIn } from "./store/actions/actionSlice";
 function App() {
   const { theme } = useSelector((state) => state.data);
   const { isAuthe } = useSelector((state) => state.data);
-  const dispatch = useDispatch();  
-  const [loding, setLoding] = useState();
+  const dispatch = useDispatch();
   useEffect(() => {
     // const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
     // if (darkThemeMq.matches) {
@@ -18,9 +17,7 @@ function App() {
     //   setTheme("");
     //   // Theme set to light.
     // }
-    setLoding(true);
     const data = JSON.parse(localStorage.getItem("user"));
-    setLoding(false);
     if (data) {
       dispatch(singIn(data));
     } else {

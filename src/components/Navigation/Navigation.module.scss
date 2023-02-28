@@ -1,7 +1,7 @@
 .nav {
   background-color: var(--card-bg);
   display: grid;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: min-content 1fr;
   &__collapse {
     font-size: 1.6rem;
     border: none;
@@ -24,7 +24,6 @@
     font-weight: bolder;
     position: relative;
     transition: all 0.2s;
-    // border-bottom: 1px solid var(--text-secondary);
     &_link {
       color: var(--text-color);
       display: flex;
@@ -51,6 +50,7 @@
     justify-content: start;
     transition: all 0.2s;
     padding: 1.5rem 3rem;
+
     &_icon {
       font-size: 2rem;
     }
@@ -138,7 +138,7 @@ span {
   .theme {
     background-color: var(--toggle-button);
     left: 0;
-    color: var(--btn-primary  );
+    color: var(--btn-primary);
     transition: all 0.2s;
     transform: translate(0%, 0%);
   }

@@ -2,9 +2,34 @@
   min-height: 100vh;
   max-height: 100vh;
   padding: 2rem 4rem;
-  display: grid;    grid-auto-rows: min-content;
+  display: grid;
+  grid-auto-rows: min-content;
   gap: 3rem;
   overflow-y: auto;
+  
+  &__card {
+    background-color: var(--card-bg);
+    padding: 1rem;
+    width: 100%;
+    border-radius: 1.2rem;
+    &_title {
+      color: var(--text-color);
+      font-size: 2rem;
+    }
+    &_top {
+      padding: 2rem;
+      display: grid;
+      gap: 2rem;
+    }
+    &_bottom {
+      padding: 2rem;
+    }
+    &_topContent {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
   &__header {
     display: flex;
     align-items: center;
@@ -20,11 +45,6 @@
       align-items: center;
       padding: 1rem 2rem;
       border-radius: 10rem;
-      option {
-        // after same change
-        // background-color: var(--selecter-bg);
-        // color: var(--selecter-text);
-      }
     }
     &_formImg {
       height: 2rem;
@@ -46,31 +66,11 @@
     color: var(--light-text1);
     font-size: 1.2rem;
   }
-  &__card {
-    background-color: var(--card-bg);
-    padding: 1rem;
-    border-radius: 1.2rem;
-    &_title {
-      color: var(--text-color);
-      font-size: 2rem;
-    }
-    &_top {
-      padding: 2rem;
-      display: grid;
-      gap: 2rem;
-    }
-    &_bottom {
-      padding: 2rem;
-    }
-    &_topContent {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-  }
+
   &__stake {
     display: grid;
     gap: 2rem;
+    // grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     grid-template-columns: repeat(3, 1fr);
     animation: stakeAnimation 0.5s ease-in;
     transition: 0.2s;
@@ -100,7 +100,8 @@
     font-size: 1.4rem;
     color: var(--text-color2);
     h1 {
-      font-size: 2rem;color: var(--text-color);
+      font-size: 2rem;
+      color: var(--text-color);
     }
   }
   @keyframes stakeAnimation {

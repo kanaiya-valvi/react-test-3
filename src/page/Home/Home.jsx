@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { removeCoin, selectCoin } from "../../store/actions/actionSlice";
+import {
+  removeCoin,
+  selectCoin,
+  setUserCoin,
+} from "../../store/actions/actionSlice";
 import Chart from "../../components/Chart/Chart";
 import useFetch from "../../hooks/useFetch";
 import Stake from "../../components/Stake/Stake";
@@ -23,6 +27,7 @@ const Home = () => {
   const [coinData, setCoinData] = useState(null);
   const dispatch = useDispatch();
   const navigation = useNavigate();
+  const [localCoin, setLocalCoin] = useState([]);
   const coins = [];
 
   const coinspark = coinData?.sparkline;
@@ -35,10 +40,15 @@ const Home = () => {
   const goToCoins = () => {
     navigation("/coins");
   };
-
   const getcoin = useFetch(`coin/${coin?.uuid}`);
 
   useEffect(() => {
+    const datcoins = localStorage.getItem("userCoin");
+    setLocalCoin(JSON.parse(datcoins));
+    if (localCoin) {
+      dispatch(setUserCoin(localCoin));
+    }
+
     setCoinData(getcoin?.data.coin);
   }, [coinData, getcoin, userCoins, coin]);
   return (
@@ -151,7 +161,7 @@ const Home = () => {
                   __html: `${coinData?.description}`,
                 }}></div>
             </div>
-          </div>  
+          </div>
         </div>
       )}
     </>

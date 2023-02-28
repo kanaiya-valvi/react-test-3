@@ -23,6 +23,7 @@ const actionSlice = createSlice({
     },
     addCoin(state, action) {
       state.userCoins.push(action.payload);
+      localStorage.setItem("userCoin", JSON.stringify(state.userCoins));
     },
     selectCoin(state, action) {
       state.coinIndex = action.payload;
@@ -37,14 +38,18 @@ const actionSlice = createSlice({
       state.modalHide = !state.modalHide;
     },
     removeCoin(state, action) {
+      state.userCoins = state.userCoins.filter(
+        (item) => item.uuid !== action.payload.uuid
+      );
+      localStorage.setItem("userCoin", JSON.stringify(state.userCoins));
       if (state.userCoins.length === 0) {
         state.userCoins = [];
-      } else {
-        state.userCoins = state.userCoins.filter(
-          (item) => item.uuid !== action.payload.uuid
-        );
+        localStorage.removeItem("userCoin");
       }
       state.coinIndex = 0;
+    },
+    setUserCoin(state, action) {
+      state.userCoins = action.payload;
     },
   },
 });
@@ -60,4 +65,5 @@ export const {
   setLoading,
   hideModel,
   removeCoin,
+  setUserCoin,
 } = actionSlice.actions;
