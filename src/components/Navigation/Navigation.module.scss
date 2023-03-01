@@ -2,25 +2,26 @@
   background-color: var(--card-bg);
   display: grid;
   grid-template-rows: min-content 1fr;
-  &__collapse {
-    font-size: 1.6rem;
-    border: none;
-    position: absolute;
-    right: 0%;
-    height: 3rem;
-    width: 3rem;
-    top: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transform: translate(50%, -50%);
-    border-radius: 20rem;
+  transition: 0.2s;
+  position: relative;
+  position: relative;
+  @media (max-width: 768px) {
+    position: sticky;
+    top: 0;
+  }
+  &__menu {
+    display: grid;
+    grid-auto-rows: 1fr auto;
+    padding: 1rem 2rem;
+    background-color: var(--card-bg);
   }
   &__logo {
-    padding: 2rem 3rem;
+    padding: 2rem;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     font-size: 3rem;
+    gap: 2rem;
     font-weight: bolder;
     position: relative;
     transition: all 0.2s;
@@ -30,6 +31,7 @@
       align-items: center;
       gap: 2rem;
       justify-content: center;
+      transition: 0.2s;
     }
     &_icon {
       font-size: 3rem;
@@ -40,23 +42,25 @@
     flex-direction: column;
     align-items: start;
     color: var(--text-color2);
+    gap: 3rem;
   }
   &__link {
     font-size: 1.8rem;
     color: var(--text-color2);
-    display: grid;
-    grid-template-columns: auto 100%;
+    display: flex;
     gap: 2rem;
     justify-content: start;
     transition: all 0.2s;
-    padding: 1.5rem 3rem;
-
+    width: fit-content;
+    @media (max-width: 768px) {
+      padding: 1rem;
+      gap: 1rem;
+    }
     &_icon {
       font-size: 2rem;
     }
   }
   &__acttion {
-    padding: 2rem 3rem;
     display: flex;
     gap: 2rem;
     flex-direction: column;
@@ -79,35 +83,88 @@ span {
   width: auto;
   visibility: 1;
 }
-[collapsible="hide"] {
-  span {
-    overflow-x: hidden;
-    width: 0 !important;
-    visibility: 1;
-  }
-  .nav {
-    &__list {
-      align-items: center;
+
+@media (min-width: 768px) {
+  [collapse="show"] {
+    span {
+      overflow-x: hidden;
+      width: 0 !important;
+      visibility: 1;
     }
-    &__link {
-      grid-template-columns: auto 0%;
-      gap: 0;
-      transition: all 0.2s;
-      padding: 1.5rem 2rem;
-    }
-    &__logo {
-      justify-content: center;
-      padding: 2rem;
-      &_link {
+    .nav {
+      &__link {
+        transition: all 0.2s;
         gap: 0;
       }
-    }
-    &__acttion {
-      padding: 2rem;
+      &__list {
+        align-items: center;
+      }
+      &__logo {
+        justify-content: center;
+        gap: 0;
+        &_link {
+          width: 0;
+        overflow: hidden;
+          gap: 0;
+          text-align: center;
+        }
+      }
     }
   }
 }
-
+@media (max-width: 768px) {
+  [collapse="hide"] {
+    .nav {
+      height: 100vh;
+      &__menu {
+        overflow: hidden;
+        position: absolute;
+        padding: 0 2rem;
+        top: 100%;
+        height: 0%;
+        width: 100%;
+        background-color: #fff;
+        transition: all 0.2s;
+        height: 0;
+        min-height: 0%;
+        background-color: var(--card-bg);
+      }
+    }
+  }
+  [collapse="show"] {
+    .nav {
+      height: 100vh;
+      &__menu {
+        overflow: hidden;
+        position: absolute;
+        top: 100%;
+        height: 90vh;
+        min-height: 100%;
+        width: 100%;
+        background-color: #fff;
+        transition: all 0.2s;
+        z-index: 9999;
+        gap:5rem;
+        background-color: var(--card-bg);
+      }
+    }
+  }
+}
+.menuHide {
+  right: 0;
+  border: none;
+  outline: none;
+  font-size: 1.5rem;
+  background-color: var(--btn-primary);
+  padding: 1rem;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  color: var(--btn-primary-text);
+}
 .toggle {
   width: 4rem;
   height: 2rem;
@@ -132,7 +189,7 @@ span {
     transition: all 0.2s;
   }
 }
-[them="dark"] { 
+[them="dark"] {
   background-color: var(--toggle-bg);
   transition: all 0.2s;
   .theme {

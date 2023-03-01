@@ -60,6 +60,9 @@ main {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--card-hover);
 }
+.recharts-wrapper {
+  z-index: 1;
+}
 
 table {
   tr {

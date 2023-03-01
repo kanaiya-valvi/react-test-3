@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 import NavLinks from "./NavLinks";
 import { signOut } from "firebase/auth";
 
@@ -20,7 +20,9 @@ import {
 const Navigation = () => {
   const dispatch = useDispatch();
   const { theme } = useSelector((state) => state.data);
-  const [navBarHide, setNavBarHide] = useState("");
+  const [navBarHide, setNavBarHide] = useState(false);
+  const { pathname } = useLocation();
+
   const logOutHandler = () => {
     signOut(auth)
       .then(() => {
@@ -34,19 +36,29 @@ const Navigation = () => {
 
   let themeLigit = <FontAwesomeIcon icon={faSun} />;
   let themedark = <FontAwesomeIcon icon={faMoon} />;
+
+  const diviceWidth = window.screen.width;
+  window.addEventListener("resize", () => {
+    if (diviceWidth <= 768) {
+      setNavBarHide(false);
+    }
+  });
   const themeHandler = () => {
     dispatch(setTheme());
   };
 
-  const navBarToggle = () => {
-    navBarHide !== "hide" ? setNavBarHide("hide") : setNavBarHide("");
+  useEffect(() => {
+    if (diviceWidth <= 768) {
+      setNavBarHide(false);
+    }
+  }, [pathname]);
+  const navBarHandler = () => {
+    setNavBarHide(!navBarHide);
   };
+
   return (
-    <nav className={style.nav} collapsible={navBarHide}>
+    <nav className={style.nav} collapse={navBarHide ? "show" : "hide"}>
       <div className={style.nav__logo}>
-        <button className={style.nav__collapse} onClick={navBarToggle}>
-          <FontAwesomeIcon icon={faBars} />
-        </button>
         <NavLink to="/" className={style.nav__logo_link}>
           <FontAwesomeIcon
             icon={faBitcoinSign}
@@ -54,23 +66,28 @@ const Navigation = () => {
           />
           <span>BITCO</span>
         </NavLink>
-      </div>
-      <ul className={style.nav__list}>
-        <NavLinks />
-      </ul>
-      <div className={style.nav__acttion}>
-        <div className={style.toggle} them={theme} onClick={themeHandler}>
-          <div className={style.theme}>
-            {theme === "dark" ? themeLigit : themedark}
-          </div>
-        </div>
-        <button className={style.logout} onClick={logOutHandler}>
-          <FontAwesomeIcon
-            icon={faArrowRightFromBracket}
-            className={style.nav__link_icon}
-          />
-          <span>Logout</span>
+        <button onClick={navBarHandler} className={style.menuHide}>
+          <FontAwesomeIcon icon={faBars} />
         </button>
+      </div>
+      <div className={style.nav__menu}>
+        <ul className={style.nav__list}>
+          <NavLinks />
+        </ul>
+        <div className={style.nav__acttion}>
+          <div className={style.toggle} them={theme} onClick={themeHandler}>
+            <div className={style.theme}>
+              {theme === "dark" ? themeLigit : themedark}
+            </div>
+          </div>
+          <button className={style.logout} onClick={logOutHandler}>
+            <FontAwesomeIcon
+              icon={faArrowRightFromBracket}
+              className={style.nav__link_icon}
+            />
+            <span>Logout</span>
+          </button>
+        </div>
       </div>
     </nav>
   );

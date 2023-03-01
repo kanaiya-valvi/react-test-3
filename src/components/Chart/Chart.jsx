@@ -19,7 +19,11 @@ const Chart = ({ coins }) => {
             <stop offset="75%" stopColor="#2451B7" stopOpacity="0.01" />
           </linearGradient>
         </defs>
-        <Area dataKey="price" fill="url(#color)" stroke="#2451B7" />
+        <Area
+          dataKey="price"
+          fill="url(#color)"
+          stroke="#2451B7"          
+        />
         <YAxis
           dataKey="price"
           axisLine={false}
