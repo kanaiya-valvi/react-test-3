@@ -150,7 +150,7 @@ const Home = () => {
           <div className={style.dashboard__card}>
             <div className={style.dashboard__card_bottom}>
               <h1 className={style.dashboard__card_title}>APY</h1>
-              <Chart coins={coins} />
+              <Chart   coins={coins} />
             </div>
           </div>
           <div className={style.dashboard__card}>

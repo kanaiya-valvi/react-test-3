@@ -1,41 +1,40 @@
 import React from "react";
 import {
-  Line,
   CartesianGrid,
   XAxis,
   YAxis,
   Tooltip,
   ResponsiveContainer,
-  Legend,
-  ComposedChart,
-  Area,  
+  Area,
+  AreaChart,
 } from "recharts";
-import style from "./Chart.module.scss";
+
 const Chart = ({ coins }) => {
   return (
-    <div className={style.chart}>
-      <ResponsiveContainer height={200}>
-        <ComposedChart
-          width={500}
-          height={400}
-          data={coins}
-          viewBox={{ width: 800, height: 600 }}
-          margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-          <CartesianGrid stroke="#ccc" strokeDasharray="3 3" />
-          {/* <Line type="monotone" dataKey="price" stroke="#8884d8" /> */}
-          <YAxis dataKey="price" />
-          <XAxis />
-          <Tooltip dataKey="tool" />
-          <Area
-            type="monotone"
-            dataKey="price"
-            fill="#77a9f33b"
-            viewBox={{ width: 800, height: 600 }}
-          />
-          <Legend />
-        </ComposedChart>
-      </ResponsiveContainer>
-    </div>
+    <ResponsiveContainer width={"99%"} height={300}>
+      <AreaChart data={coins}>
+        <defs>
+          <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#2451B7" stopOpacity="0.3" />
+            <stop offset="75%" stopColor="#2451B7" stopOpacity="0.01" />
+          </linearGradient>
+        </defs>
+        <Area dataKey="price" fill="url(#color)" stroke="#2451B7" />
+        <YAxis
+          dataKey="price"
+          axisLine={false}
+          tickLine={false}
+          tickCount={8}
+          tickFormatter={(number) => `$${number.toFixed(2)}`}
+        />
+        <XAxis />
+        <Tooltip
+          dataKey="price"
+          tooltipFormatter={(number) => `$${number.toFixed(2)}`}
+        />
+        <CartesianGrid opacity="0.2" stroke="#2451B7" vertical={false} />
+      </AreaChart>
+    </ResponsiveContainer>
   );
 };
 

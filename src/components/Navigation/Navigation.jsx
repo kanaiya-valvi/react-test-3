@@ -16,12 +16,6 @@ import {
   faMoon,
   faBars,
 } from "@fortawesome/free-solid-svg-icons";
-// import {
-//   solid,
-//   regular,
-//   brands,
-//   icon,
-// } from "@fortawesome/fontawesome-svg-core/import.macro";
 
 const Navigation = () => {
   const dispatch = useDispatch();
@@ -31,6 +25,7 @@ const Navigation = () => {
     signOut(auth)
       .then(() => {
         localStorage.removeItem("user");
+        localStorage.removeItem("userCoin");
         dispatch(signOutAuth());
       })
       .catch((error) => alert(error.message));

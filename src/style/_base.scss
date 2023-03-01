@@ -33,8 +33,6 @@ ul {
   }
 }
 main {
-  // display: flex;
-  // justify-content: center;
   max-width: 144rem;
   margin: 0 auto;
   background-color: var(--background);
@@ -48,19 +46,19 @@ main {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #000;
+  background: var(--background);
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: var(--white);
   border-radius: 10rem;
-  background: red;
+  background: var(--text-color2);
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: var(--card-hover);
 }
 
 table {
