@@ -138,7 +138,7 @@ function Table({ columns, data, search }) {
               </strong>{" "}
             </span>
           </div>
-          <div className={style.pagination__gotoPage}>
+          {/* <div className={style.pagination__gotoPage}>
             <span>
               | Go to page:{" "}
               <input
@@ -162,7 +162,7 @@ function Table({ columns, data, search }) {
                 </option>
               ))}
             </select>
-          </div>
+          </div> */}
           <div className={style.pagination__btn}>
             <button onClick={() => nextPage()} disabled={!canNextPage}>
               <FontAwesomeIcon icon={faAngleRight} />
