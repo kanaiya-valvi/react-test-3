@@ -8,19 +8,28 @@ import useFetch from "../../hooks/useFetch";
 import Table from "../../components/Table/Table";
 import AddCoin from "../../components/AddCoin/AddCoin";
 import { changeFormate } from "../../utils/priceFormatter";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowDown, faArrowUp } from "@fortawesome/free-solid-svg-icons";
 
 const Coins = () => {
-  const dispatch = useDispatch();
-  const { modalHide, loading } = useSelector((state) => state.data);
   const [datas, setDatas] = useState([]);
-  const { userCoins } = useSelector((state) => state.data);
   const [coins, setCoins] = useState({});
   const [search, setSearch] = useState(false);
+  const { modalHide, loading } = useSelector((state) => state.data);
 
-  const dat = useFetch("coins");
+  const { userCoins } = useSelector((state) => state.data);
+  const dispatch = useDispatch();
+
+  const coindata = useFetch("coins");
+  useEffect(() => {
+    if (coindata !== null) {
+      setDatas(coindata?.data?.coins);
+    }
+  }, [coindata, userCoins]);
 
   const addCoinHandler = (coin) => {
-    if (!userCoins.includes(coin)) {
+    const items = userCoins.filter((item) => item.uuid === coin.uuid);
+    if (items.length === 0) {
       dispatch(addCoin(coin));
       setCoins({ status: "success", data: coin });
     } else {
@@ -33,14 +42,9 @@ const Coins = () => {
     if (search) setSearch(false);
     else setSearch(true);
   };
-  useEffect(() => {
-    if (dat !== null) {
-      setDatas(dat.data.coins);
-    }
-  }, [dat, datas, modalHide]);
 
-  const data = useMemo(() => datas, [datas]);
-  // btcPrice
+  const data = useMemo(() => datas, [datas, userCoins]);
+
   const columns = useMemo(
     () => [
       {
@@ -67,23 +71,22 @@ const Coins = () => {
       {
         Header: "Price",
         accessor: "price",
-        Cell: (tableProps) => (
-          <span>{changeFormate(tableProps.row.original.price)}</span>
-        ),
+        Cell: (tableProps) => {
+          const price = changeFormate(tableProps.row.original.price);
+          if (price === undefined) return "-";
+          else return price;
+        },
       },
       {
-        Header: "BTC btcPrice",
+        Header: "BTC Price",
         accessor: "btcPrice",
-        Cell: (tableProps) => (
-          <span>{changeFormate(tableProps.row.original.btcPrice)}</span>
-        ),
+        Cell: (tableProps) => changeFormate(tableProps.row.original.btcPrice),
       },
       {
         Header: "24h volume",
         accessor: "24hVolume",
-        Cell: (tableProps) => (
-          <span>{changeFormate(tableProps.row.original["24hVolume"])}</span>
-        ),
+        Cell: (tableProps) =>
+          changeFormate(tableProps.row.original["24hVolume"]),
       },
 
       {
@@ -93,6 +96,17 @@ const Coins = () => {
           const valueChange = tableProps.row.original.change;
           return (
             <span className={valueChange < 0 ? style.red : style.green}>
+              {valueChange < 0 ? (
+                <FontAwesomeIcon
+                  icon={faArrowDown}
+                  className={style.sorted__icon}
+                />
+              ) : (
+                <FontAwesomeIcon
+                  icon={faArrowUp}
+                  className={style.sorted__icon}
+                />
+              )}{" "}
               {changeFormate(valueChange)}
             </span>
           );
@@ -101,11 +115,7 @@ const Coins = () => {
       {
         Header: "MarketCap",
         accessor: "marketCap",
-        Cell: (tableProps) => (
-          <>
-            <span>{changeFormate(tableProps.row.original.marketCap)}</span>
-          </>
-        ),
+        Cell: (tableProps) => changeFormate(tableProps.row.original.marketCap),
       },
       {
         Header: "ADD Button",
@@ -122,7 +132,6 @@ const Coins = () => {
     ],
     [userCoins]
   );
-
   return (
     <>
       {loading && <Loader />}

@@ -24,13 +24,12 @@ const Navigation = () => {
   const { pathname } = useLocation();
 
   const logOutHandler = () => {
-    signOut(auth)
-      .then(() => {
-        localStorage.removeItem("user");
-        localStorage.removeItem("userCoin");
-        dispatch(signOutAuth());
-      })
-      .catch((error) => alert(error.message));
+    signOut(auth).then(() => {
+      localStorage.removeItem("user");
+      localStorage.removeItem("userCoin");
+      dispatch(signOutAuth());
+    });
+    // .catch((error) => alert(error.message));
     // .finally(() => setLoading(false));
   };
 

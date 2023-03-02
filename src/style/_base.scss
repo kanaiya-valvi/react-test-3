@@ -5,6 +5,7 @@
 }
 html {
   font-size: 62.5%;
+  scroll-behavior: smooth;
   @media (max-width: 1024px) {
     font-size: 56.25%;
   }
@@ -39,9 +40,10 @@ main {
 }
 
 ::-webkit-scrollbar {
-  width: 2px;
-  height: 2px;
+  width: 0.5rem;
+  height: .5rem;
   margin-right: 0.1rem;
+  height: 0.5rem;
 }
 
 /* Track */
@@ -60,8 +62,13 @@ main {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--card-hover);
 }
+.recharts-responsive-container {
+  display: flex;
+  justify-content: flex-end;
+}
 .recharts-wrapper {
   z-index: 1;
+  position: unset !important;
 }
 
 table {
@@ -74,6 +81,9 @@ table {
         width: 2rem;
         height: 2rem;
       }
+    }
+    th {
+      text-transform: capitalize;
     }
   }
 }

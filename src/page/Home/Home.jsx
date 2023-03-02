@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  removeCoin,
-  selectCoin,
-  setUserCoin,
-} from "../../store/actions/actionSlice";
+import { removeCoin, selectCoin } from "../../store/actions/actionSlice";
 import Chart from "../../components/Chart/Chart";
 import useFetch from "../../hooks/useFetch";
 import Stake from "../../components/Stake/Stake";
@@ -27,7 +23,6 @@ const Home = () => {
   const [coinData, setCoinData] = useState(null);
   const dispatch = useDispatch();
   const navigation = useNavigate();
-  const [localCoin, setLocalCoin] = useState([]);
   const coins = [];
 
   const coinspark = coinData?.sparkline;
@@ -43,14 +38,8 @@ const Home = () => {
   const getcoin = useFetch(`coin/${coin?.uuid}`);
 
   useEffect(() => {
-    const datcoins = localStorage.getItem("userCoin");
-    setLocalCoin(JSON.parse(datcoins));
-    if (localCoin) {
-      dispatch(setUserCoin(localCoin));
-    }
-
     setCoinData(getcoin?.data.coin);
-  }, [coinData, getcoin, userCoins, coin]);
+  }, [coinData, userCoins, getcoin, coin]);
   return (
     <>
       {userCoins?.length === 0 && (
@@ -68,7 +57,7 @@ const Home = () => {
         <div className={style.dashboard}>
           <div className={style.dashboard__card}>
             <div className={style.dashboard__header}>
-              <h1 className={style.dashboard__header_heading}>Dassboard</h1>
+              <h1 className={style.dashboard__header_heading}>Dashboard</h1>
               <div className={style.dashboard__header_form}>
                 <img
                   src={coinData?.iconUrl}
@@ -110,38 +99,33 @@ const Home = () => {
                     alt={coinData?.name}
                   />
                   <div className={style.dashboard__stake_card_text}>
-                    <p>{coinData?.name} price</p>
+                    <p>price</p>
                     <h3>{changeFormate(coinData?.price)}</h3>
                   </div>
                 </div>
                 <Stake
                   icon={faRetweet}
-                  name={coinData?.name}
-                  title="Cahnge"
+                  title="Last 24h Cahnge"
                   values={coinData?.change}
                 />
                 <Stake
                   icon={faLineChart}
-                  name={coinData?.name}
-                  title="marketCap"
+                  title="MarketCap"
                   values={changeFormate(coinData?.marketCap)}
                 />
                 <Stake
                   icon={faChartBar}
-                  name={coinData?.name}
-                  title="btcPrice"
+                  title="BTC Price"
                   values={changeFormate(coinData?.btcPrice)}
                 />
                 <Stake
                   icon={faClockRotateLeft}
-                  name={coinData?.name}
-                  title="24h Volume"
+                  title="Last 24h Volume"
                   values={changeFormate(coinData?.["24hVolume"])}
                 />
                 <Stake
                   icon={faChartPie}
-                  name={coinData?.name}
-                  title="numberOfMarkets"
+                  title="No. Of Markets"
                   values={coinData?.numberOfMarkets}
                 />
               </div>
@@ -150,7 +134,7 @@ const Home = () => {
           <div className={style.dashboard__card}>
             <div className={style.dashboard__card_bottom}>
               <h1 className={style.dashboard__card_title}>APY</h1>
-              <Chart   coins={coins} />
+              <Chart coins={coins} />
             </div>
           </div>
           <div className={style.dashboard__card}>

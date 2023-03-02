@@ -9,7 +9,7 @@
     margin-bottom: 2rem;
     font-size: 3rem;
     text-align: center;
-    color: var(--text-primary);
+    color: var(--text-color);
   }
   &__container {
     padding: 4rem;
@@ -17,6 +17,12 @@
     min-height: 70vh;
     border-radius: 8px;
     background-color: var(--card-bg);
+    @media (max-width: 768px) {
+      width: 60vw;
+    }
+    @media (max-width: 425px) {
+      width: 80vw;
+    }
   }
   &__form {
     display: flex;
@@ -28,8 +34,8 @@
       gap: 2rem;
     }
     &_input {
-      border: 1px solid var(--text-primary);
-      color: var(--text-primary);
+      border: 1px solid var(--dark-text1);
+      color: var(--dark-text1);
       outline: none;
       font-size: 1.4rem;
       height: 2rem;
@@ -46,12 +52,13 @@
       border-radius: 4px;
       transition: all 0.2s;
       font-weight: bolder;
-      background-color: var(--primary);
-      color: var(--white);
+      background-color: var(--btn-primary);
+      color: var(--btn-primary-text);
+      cursor: pointer;
     }
     &_singUpText {
       font-size: 1.4rem;
-      color: var(--text-secondary);
+      color: var(--light-text1);
     }
     &_singUpBtn {
       background-color: transparent;
@@ -60,7 +67,7 @@
       font-weight: bolder;
       text-decoration: underline;
       cursor: pointer;
-      color: var(--text-primary);
+      color: var(--text-color2);
     }
   }
 }
@@ -69,6 +76,16 @@
   border: none;
   cursor: pointer;
   font-weight: bolder;
-  text-decoration: underline;
-  color: var(--text-secondary);
+  color: var(--text-color2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-radius: 10rem;
+  &__logo {
+    height: 3rem;
+    width: 3rem;
+  }
 }

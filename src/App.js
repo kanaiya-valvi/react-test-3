@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Auth from "./auth/Auth";
 import Dashboard from "./layout/Dashboard";
@@ -17,6 +17,7 @@ function App() {
     //   setTheme("");
     //   // Theme set to light.
     // }
+
     const data = JSON.parse(localStorage.getItem("user"));
     if (data) {
       dispatch(singIn(data));

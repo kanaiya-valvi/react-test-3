@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import style from './Stake.module.scss'
+import style from "./Stake.module.scss";
 
 const Stake = ({ icon, name, title, values }) => {
   return (
@@ -8,10 +8,7 @@ const Stake = ({ icon, name, title, values }) => {
       <FontAwesomeIcon icon={icon} className={style.dashboard__stake_icon} />
       <div className={style.dashboard__stake_card_text}>
         <div className={style.dashboard__stake_card_text}>
-          <p>
-            {name}
-            {title}
-          </p>
+          <p>{title}</p>
           <h3>{values}</h3>
         </div>
       </div>

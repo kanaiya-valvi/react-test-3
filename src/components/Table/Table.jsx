@@ -69,29 +69,33 @@ function Table({ columns, data, search }) {
                   {...headerGroup.getHeaderGroupProps(
                     headerGroup.getSortByToggleProps
                   )}>
-                  {headerGroup.headers.map((column) => (
-                    <th
-                      {...column.getHeaderProps(column.getSortByToggleProps())}>
-                      {column.render("Header")}
-                      <span className={style.sorted}>
-                        {column.isSorted ? (
-                          column.isSortedDesc ? (
-                            <FontAwesomeIcon
-                              icon={faAngleUp}
-                              className={style.sorted__icon}
-                            />
+                  {headerGroup.headers.map((column) => {
+                    return (
+                      <th
+                        {...column.getHeaderProps(
+                          column.getSortByToggleProps()
+                        )}>
+                        {column.render("Header")}
+                        <span className={style.sorted}>
+                          {column.isSorted ? (
+                            column.isSortedDesc ? (
+                              <FontAwesomeIcon
+                                icon={faAngleUp}
+                                className={style.sorted__icon}
+                              />
+                            ) : (
+                              <FontAwesomeIcon
+                                icon={faAngleDown}
+                                className={style.sorted__icon}
+                              />
+                            )
                           ) : (
-                            <FontAwesomeIcon
-                              icon={faAngleDown}
-                              className={style.sorted__icon}
-                            />
-                          )
-                        ) : (
-                          ""
-                        )}
-                      </span>
-                    </th>
-                  ))}
+                            ""
+                          )}
+                        </span>
+                      </th>
+                    );
+                  })}
                 </tr>
               ))}
             </thead>
@@ -100,9 +104,17 @@ function Table({ columns, data, search }) {
                 prepareRow(row);
                 return (
                   <tr {...row.getRowProps()}>
-                    {row.cells.map((cell) => (
-                      <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                    ))}
+                    {row.cells.map((cell) => {
+                      const textPosition =
+                        cell.column.Header === "24h volume" ? "end" : "center";
+                      return (
+                        <td
+                          {...cell.getCellProps()}
+                          style={{ textAlign: textPosition }}>
+                          {cell.render("Cell")}
+                        </td>
+                      );
+                    })}
                   </tr>
                 );
               })}
@@ -126,6 +138,31 @@ function Table({ columns, data, search }) {
               </strong>{" "}
             </span>
           </div>
+          <div className={style.pagination__gotoPage}>
+            <span>
+              | Go to page:{" "}
+              <input
+                type="number"
+                defaultValue={pageIndex + 1}
+                onChange={(e) => {
+                  const page = e.target.value ? Number(e.target.value) - 1 : 0;
+                  gotoPage(page);
+                }}
+                style={{ width: "100px" }}
+              />
+            </span>{" "}
+            <select
+              value={pageSize}
+              onChange={(e) => {
+                setPageSize(Number(e.target.value));
+              }}>
+              {[10, 15, 20].map((pageSize) => (
+                <option key={pageSize} value={pageSize}>
+                  Show {pageSize}
+                </option>
+              ))}
+            </select>
+          </div>
           <div className={style.pagination__btn}>
             <button onClick={() => nextPage()} disabled={!canNextPage}>
               <FontAwesomeIcon icon={faAngleRight} />
@@ -136,29 +173,6 @@ function Table({ columns, data, search }) {
               <FontAwesomeIcon icon={faAnglesRight} />
             </button>
           </div>
-          {/* <span>
-            | Go to page:{" "}
-            <input
-              type="number"
-              defaultValue={pageIndex + 1}
-              onChange={(e) => {
-                const page = e.target.value ? Number(e.target.value) - 1 : 0;
-                gotoPage(page);
-              }}
-              style={{ width: "100px" }}
-            />
-          </span>{" "}
-          <select
-            value={pageSize}
-            onChange={(e) => {
-              setPageSize(Number(e.target.value));
-            }}>
-            {[10, 15, 20].map((pageSize) => (
-              <option key={pageSize} value={pageSize}>
-                Show {pageSize}
-              </option>
-            ))}
-          </select> */}
         </div>
       </div>
     </div>

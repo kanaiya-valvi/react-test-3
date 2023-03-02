@@ -1,12 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+let userCoins = [];
+const datcoins = localStorage.getItem("userCoin");
+if (datcoins) {
+  userCoins = JSON.parse(datcoins);
+}
+
 const inisialValue = {
   isAuthe: false,
   loading: false,
   modalHide: false,
   theme: "",
   user: [],
-  userCoins: [],
+  userCoins: userCoins,
   coinIndex: 0,
 };
 
@@ -48,9 +54,9 @@ const actionSlice = createSlice({
       }
       state.coinIndex = 0;
     },
-    setUserCoin(state, action) {
-      state.userCoins = action.payload;
-    },
+    // setUserCoin(state, action) {
+    //   state.userCoins = action.payload;
+    // },
   },
 });
 
@@ -65,5 +71,5 @@ export const {
   setLoading,
   hideModel,
   removeCoin,
-  setUserCoin,
+  // setUserCoin,
 } = actionSlice.actions;

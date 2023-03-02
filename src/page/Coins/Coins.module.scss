@@ -23,8 +23,10 @@
   font-weight: bolder;
   border: none;
   padding: 0.5rem 1rem;
-  transition: .2s;
-  border-radius: 0.2rem;&:hover{
+  transition: all 0.2s;
+  cursor: pointer;
+  border-radius: 0.2rem;
+  &:hover {
     background-color: var(--btn-add-hover);
   }
 }

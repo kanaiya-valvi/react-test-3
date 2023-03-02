@@ -10,13 +10,13 @@ https://dribbble.com/shots/15186334-Celsius-Web-App-Dashboard
 https://developers.coinranking.com/account
 
 ** FEATURES **
-firebase authentication using email and google
-table to display data (sorting, searching, filtering)
-redux@toolkit for state managment
-react-router for routing
-axios for api requests
-responsive design
-support for dark theme
+✅ firebase authentication using email and google
+✅ table to display data (sorting, searching, filtering)
+✅ redux@toolkit for state managment
+✅ react-router for routing
+✅ axios for api requests
+✅ responsive design
+✅ support for dark theme
 
 render below properties for coins as a table with searching,filtering, sorting functionality
 symbol, name, iconUrl, market cap, price, change, rank, 24h volume, btcPrice
@@ -43,6 +43,7 @@ charts to visulize data
 6. settings
 
 <!-- rechart -->
+
 https://www.youtube.com/watch?v=iL4irerdGdU
 
 https://recharts.org/en-US/examples/CustomizedLabelLineChart

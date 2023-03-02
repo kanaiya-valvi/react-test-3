@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Route, Routes } from "react-router";
 import Navigation from "../components/Navigation/Navigation";
 import Coins from "../page/Coins/Coins";
@@ -7,10 +8,12 @@ import Exchange from "../page/Exchange/Exchange";
 import Home from "../page/Home/Home";
 import Settings from "../page/Setting/Settings";
 import Stats from "../page/Stats/Stats";
+import { setUserCoin } from "../store/actions/actionSlice";
 
 import style from "./Dashboard.module.scss";
 
 const Dashboard = () => {
+
   return (
     <div className={style.container}>
       <Navigation />
