@@ -18,8 +18,8 @@
     gap: 2rem;
     grid-template-columns: 1fr max-content;
     align-items: baseline;
-    padding: 1rem 2rem;    
-    border-radius: .6rem;
+    padding: 1rem 2rem;
+    border-radius: 0.4rem;
   }
   &__search_btn {
     border: none;
@@ -32,7 +32,8 @@
 .responsiveTable {
   background-color: var(--card-bg);
   overflow-y: auto;
-  padding: 1rem 2rem;
+  padding: 2rem 2rem;
+  border-radius: 0.4rem;
 }
 .table {
   width: 100%;
@@ -75,6 +76,7 @@
   justify-content: space-between;
   background-color: var(--card-bg);
   padding: 1rem 2rem;
+  border-radius: 0.4rem;
   &__lable {
     font-size: 1.4rem;
     color: var(--text-color);
