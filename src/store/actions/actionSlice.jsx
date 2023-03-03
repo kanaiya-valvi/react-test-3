@@ -34,8 +34,12 @@ const actionSlice = createSlice({
     selectCoin(state, action) {
       state.coinIndex = action.payload;
     },
-    setTheme(state) {
-      state.theme = state.theme === "dark" ? "" : "dark";
+    setTheme(state, action) {
+      if (!action.payload) {
+        state.theme = state.theme === "dark" ? "" : "dark";
+      } else {
+        state.theme = action.payload;
+      }
     },
     setLoading(state) {
       state.loading = !state.loading;
@@ -54,9 +58,6 @@ const actionSlice = createSlice({
       }
       state.coinIndex = 0;
     },
-    // setUserCoin(state, action) {
-    //   state.userCoins = action.payload;
-    // },
   },
 });
 

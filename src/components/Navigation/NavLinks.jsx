@@ -15,19 +15,19 @@ import style from "./Navigation.module.scss";
 const NavLik = () => {
   return (
     <>
-      <li className="nav__item">
+      <li className={style.nav__item}>
         <NavLink className={style.nav__link} to="/">
           <FontAwesomeIcon icon={faGrip} className={style.nav__link_icon} />
           <span>Dashboard</span>
         </NavLink>
       </li>
-      <li className="nav__item">
+      <li className={style.nav__item}>
         <NavLink className={style.nav__link} to="coins">
           <FontAwesomeIcon icon={faCoins} className={style.nav__link_icon} />
           <span>Coins</span>
         </NavLink>
       </li>
-      <li className="nav__item">
+      <li className={style.nav__item}>
         <NavLink className={style.nav__link} to="exchange">
           <FontAwesomeIcon
             icon={faRightLeft}
@@ -36,13 +36,13 @@ const NavLik = () => {
           <span>Exchange</span>
         </NavLink>
       </li>
-      <li className="nav__item">
+      <li className={style.nav__item}>
         <NavLink className={style.nav__link} to="stats">
           <FontAwesomeIcon icon={faPieChart} className={style.nav__link_icon} />
           <span>Stats</span>
         </NavLink>
       </li>
-      <li className="nav__item">
+      <li className={style.nav__item}>
         <NavLink className={style.nav__link} to="settings">
           <FontAwesomeIcon icon={faGears} className={style.nav__link_icon} />
           <span>Settings</span>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import NavLinks from "./NavLinks";
 import { signOut } from "firebase/auth";
 
@@ -58,13 +58,13 @@ const Navigation = () => {
   return (
     <nav className={style.nav} collapse={navBarHide ? "show" : "hide"}>
       <div className={style.nav__logo}>
-        <NavLink to="/" className={style.nav__logo_link}>
+        <Link to="/" className={style.nav__logo_link}>
           <FontAwesomeIcon
             icon={faBitcoinSign}
             className={style.nav__logo_icon}
           />
           <span>BITCO</span>
-        </NavLink>
+        </Link>
         <button onClick={navBarHandler} className={style.menuHide}>
           <FontAwesomeIcon icon={faBars} />
         </button>
