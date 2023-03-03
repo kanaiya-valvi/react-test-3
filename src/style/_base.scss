@@ -65,9 +65,9 @@ main {
 .recharts-responsive-container {
   display: flex;
   justify-content: flex-end;
+  position: relative;
 }
 .recharts-wrapper {
-  z-index: 1;
   position: unset !important;
 }
 
