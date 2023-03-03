@@ -3,7 +3,7 @@
 ✅ change of headings in coin overview
 ✅ cursor pointer while hover on all buttons and links
 ✅ change UI of sign in with google in login form
-highlight selected navbar item
+✅ highlight selected navbar item
 ✅ prevent from adding duplicate coins
 ✅ align prices to left and right
 ✅ add dash where items are empty
