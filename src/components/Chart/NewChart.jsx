@@ -52,15 +52,6 @@ const NewChart = ({ coins }) => {
         borderWidth: 1,
       },
     ],
-    options: {
-      scales: {
-        y: {
-          ticks: {
-            callback: labels,
-          },
-        },
-      },
-    },
   };
   return <Line options={options} data={data} />;
 };
